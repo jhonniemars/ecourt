@@ -164,8 +164,14 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Subtle dark overlay just to keep the white text readable */
-    background: rgba(0, 0, 0, 0.25); 
+    /* Very subtle dark gradient only at top/bottom for text readability */
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.05) 30%,
+        rgba(0, 0, 0, 0.05) 70%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
 }
 
 .hero-banner {
