@@ -4,65 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E.Court - Play • Snack • Connect | Pickleball Court</title>
+    <meta name="description" content="E.Court - Your premier pickleball destination in Gingoog City. Book your court now!">
+    <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar" id="navbar">
-    <div class="nav-container">
-        <!-- Logo completely removed -->
-        
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#booking">Book Now</a></li>
-        </ul>
-        
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="images/logo.png" alt="E.Court Logo" class="nav-logo-img">
+                <span>E.Court</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#booking">Book Now</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<!-- Hero Section -->
-<section class="hero" id="home">
-    <div class="hero-banner">
-        <img src="banner.jpg" alt="E.Court Pickleball Court" class="hero-bg-img">
-        <div class="hero-overlay"></div>
-    </div>
-    
-    <div class="hero-content">
-        <!-- Small Circular Floating Logo -->
-        <div class="hero-logo-float">
-            <img src="logo.png" alt="E.Court Logo" class="floating-logo">
+    <!-- Hero Banner -->
+    <section class="hero" id="home">
+        <div class="hero-banner">
+            <img src="banner.jpg" alt="E.Court Pickleball Court" class="hero-img">
+            <div class="hero-overlay"></div>
         </div>
-        
-        <h1 class="hero-title">E.Court</h1>
-        <p class="hero-tagline">Play • Snack • Connect</p>
-        <p class="hero-location">
-            <i class="fas fa-map-marker-alt"></i>
-            Guanzon-Gundaya St. Brgy. 6, Gingoog City
-        </p>
-        
-        <div class="hero-buttons">
-            <a href="#booking" class="btn btn-primary">
-                <i class="fas fa-calendar-check"></i> BOOK A COURT
-            </a>
-            <a href="#about" class="btn btn-outline">
-                <i class="fas fa-info-circle"></i> LEARN MORE
-            </a>
+        <div class="hero-content">
+            <div class="hero-profile">
+                <img src="logo.png" alt="E.Court" class="profile-pic">
+            </div>
+            <h1 class="hero-title">E.Court</h1>
+            <p class="hero-tagline">Play • Snack • Connect</p>
+            <p class="hero-location"><i class="fas fa-map-marker-alt"></i> Guanzon-Gundaya St. Brgy. 6, Gingoog City</p>
+            <div class="hero-buttons">
+                <a href="#booking" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book a Court</a>
+                <a href="#about" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Learn More</a>
+            </div>
         </div>
-        
-        <div class="scroll-down">
+        <div class="scroll-indicator">
             <i class="fas fa-chevron-down"></i>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- About Section -->
     <section class="about" id="about">
@@ -74,7 +68,7 @@
             </div>
             <div class="about-grid">
                 <div class="about-image">
-                    <div class="about-logo-placeholder">E.Court</div>
+                    <img src="images/logo.png" alt="E.Court Logo">
                 </div>
                 <div class="about-text">
                     <h3>Your Premier Pickleball Destination</h3>
@@ -168,17 +162,17 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item featured">
-                    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=1200&h=800&fit=crop" alt="E.Court Pickleball Court">
+                    <img src="images/banner.jpg" alt="E.Court Pickleball Court">
                     <div class="gallery-overlay">
                         <i class="fas fa-expand"></i>
                         <span>Our Main Court</span>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&h=800&fit=crop" alt="Pickleball Equipment">
+                    <img src="images/logo.png" alt="E.Court Branding">
                     <div class="gallery-overlay">
                         <i class="fas fa-expand"></i>
-                        <span>Pickleball Action</span>
+                        <span>E.Court Identity</span>
                     </div>
                 </div>
             </div>
@@ -431,7 +425,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <div class="footer-logo-placeholder">E</div>
+                    <img src="images/logo.png" alt="E.Court" class="footer-logo">
                     <h3>E.Court</h3>
                     <p>Play • Snack • Connect</p>
                 </div>
