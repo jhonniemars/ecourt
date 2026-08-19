@@ -165,12 +165,17 @@ console.log('%cGuanzon-Gundaya St. Brgy. 6, Gingoog City', 'color: #6b7280; font
 const heroLogo = document.getElementById('heroLogo');
 const logoModal = document.getElementById('logoModal');
 const logoModalClose = document.getElementById('logoModalClose');
+const modalLogoImg = document.getElementById('modalLogoImg');
 
 // Open modal when logo is clicked
 if (heroLogo) {
     heroLogo.addEventListener('click', () => {
+        // Copy the src from the hero logo to the modal
+        modalLogoImg.src = heroLogo.src;
+        modalLogoImg.alt = 'E.Court Logo';
+        
         logoModal.classList.add('show');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
     });
 }
 
@@ -178,7 +183,7 @@ if (heroLogo) {
 if (logoModalClose) {
     logoModalClose.addEventListener('click', () => {
         logoModal.classList.remove('show');
-        document.body.style.overflow = 'auto'; // Restore scrolling
+        document.body.style.overflow = 'auto';
     });
 }
 
