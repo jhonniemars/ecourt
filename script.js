@@ -112,7 +112,7 @@ function confirmBooking() {
                    '\nPrice: 300/hour';
     
     navigator.clipboard.writeText(message).then(function() {
-        alert('Booking details copied! Please send to Instagram @ecourt.gingoog');
+        alert('✅ Success! Your booking is confirmed.');
     });
     
     document.getElementById('step3').classList.remove('active');
