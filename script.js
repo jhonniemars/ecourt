@@ -169,17 +169,16 @@ function goToStep2FromEdit() {
 }
 
 function confirmBooking() {
-    // Create booking message
+    // Create booking message (removed phone)
     const bookingMessage = `
-🎾 NEW BOOKING - E.Court
+ NEW BOOKING - E.Court
 
 Name: ${bookingData.firstName}
 Email: ${bookingData.email}
-Phone: ${bookingData.phone}
 Court: ${bookingData.court}
 Date: ${bookingData.date}
 Time: ${bookingData.time}
-Price: ₱300/hour
+Price: ₱250/hour
     `.trim();
     
     // Copy to clipboard
