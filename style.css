@@ -1440,3 +1440,24 @@ ul {
         font-size: 1.5rem !important;
     }
 }
+
+/* ===== Remove Big Gap Between Title and Card ===== */
+.booking-header-text {
+    margin-bottom: 10px !important;
+}
+
+.booking-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.booking-card {
+    margin-top: 0 !important;
+    padding-top: 30px !important;
+}
+
+/* Target any wrapper causing the gap */
+.booking > .booking-container > .booking-card,
+.booking .booking-container {
+    margin-top: 0 !important;
+}
