@@ -1461,3 +1461,40 @@ ul {
 .booking .booking-container {
     margin-top: 0 !important;
 }
+
+/* ===== NUCLEAR OPTION - Remove All Gaps ===== */
+.booking {
+    padding: 20px 20px 40px !important;
+}
+
+.booking-header-text {
+    margin: 0 0 15px 0 !important;
+    padding: 0 !important;
+}
+
+.reserve-title {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Target every possible container */
+.booking > *,
+.booking > div,
+.booking > section,
+.booking-container,
+.booking-container > *,
+.booking-card,
+.booking-card > * {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Keep some padding inside the card */
+.booking-card {
+    padding: 30px 25px !important;
+}
+
+.booking-step {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
