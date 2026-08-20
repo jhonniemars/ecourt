@@ -1366,3 +1366,77 @@ ul {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
+
+/* ===== Make Booking Form Fit Better ===== */
+.booking {
+    padding: 40px 20px !important;
+    min-height: auto !important;
+}
+
+.booking-container {
+    max-width: 650px !important;
+    margin: 0 auto !important;
+}
+
+.booking-header-text {
+    margin-bottom: 25px !important;
+    padding-top: 0 !important;
+}
+
+.reserve-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 20px !important;
+}
+
+.booking-card {
+    padding: 35px 30px !important;
+    margin-top: 0 !important;
+}
+
+.step-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 10px !important;
+}
+
+.step-subtitle {
+    margin-bottom: 25px !important;
+    font-size: 0.95rem !important;
+}
+
+.form-field {
+    gap: 6px !important;
+    margin-bottom: 15px !important;
+}
+
+.form-field label {
+    font-size: 0.9rem !important;
+}
+
+.form-field input {
+    padding: 12px 16px !important;
+    font-size: 0.95rem !important;
+}
+
+.claim-btn {
+    padding: 14px 24px !important;
+    font-size: 1rem !important;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 640px) {
+    .booking {
+        padding: 30px 15px !important;
+    }
+    
+    .booking-card {
+        padding: 25px 20px !important;
+    }
+    
+    .reserve-title {
+        font-size: 1.8rem !important;
+    }
+    
+    .step-title {
+        font-size: 1.5rem !important;
+    }
+}
