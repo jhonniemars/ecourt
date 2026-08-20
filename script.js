@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function populateSummary() {
     document.getElementById('summaryName').textContent = bookingData.firstName;
     document.getElementById('summaryEmail').textContent = bookingData.email;
-    document.getElementById('summaryPhone').textContent = bookingData.phone;
+    // Phone removed from summary
     document.getElementById('summaryCourt').textContent = bookingData.court;
     
     const formattedDate = new Date(bookingData.date).toLocaleDateString('en-US', {
