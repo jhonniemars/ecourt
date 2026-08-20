@@ -109,15 +109,14 @@ function confirmBooking() {
                    '\nCourt: ' + bookingData.court + 
                    '\nDate: ' + bookingData.date + 
                    '\nTime: ' + bookingData.time + 
-                   '\nPrice: 300/hour';
+                   '\nPayment: ' + bookingData.payment;
     
     navigator.clipboard.writeText(message).then(function() {
         alert('✅ Success! Your booking is confirmed.');
+        
+        // Redirect to Home section after clicking OK
+        window.location.href = '#home';
     });
-    
-    document.getElementById('step3').classList.remove('active');
-    document.getElementById('successStep').classList.add('active');
-    document.querySelector('.step-indicator').style.display = 'none';
 }
 
 // ===== Email Validation =====
