@@ -1311,25 +1311,26 @@ ul {
 /* ===== RESERVE YOUR SPOT Header - Fixed ===== */
 .booking-header-text {
     text-align: center !important;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     padding-top: 20px;
     width: 100%;
 }
 
 .reserve-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: 8px;
+    font-size: 6rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 15px !important;
     color: #2d5a27 !important;
-    text-transform: uppercase;
-    margin: 0;
+    text-transform: uppercase !important;
     text-align: center !important;
+    margin: 0 auto !important;
+    display: block !important;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .reserve-title {
-        font-size: 1.8rem;
-        letter-spacing: 4px;
+        font-size: 4.4rem;
+        letter-spacing: 6px;
     }
 }
