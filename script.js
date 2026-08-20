@@ -148,3 +148,101 @@ document.addEventListener('DOMContentLoaded', function() {
         radio.addEventListener('change', toggleQRCode);
     });
 });
+
+// ===== File Upload Handling =====
+let proofFileData = null;
+
+function handleFileUpload(input) {
+    const file = input.files[0];
+    
+    if (!file) return;
+    
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file (PNG, JPG)');
+        input.value = '';
+        return;
+    }
+    
+    // Validate file size (5MB max)
+    if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB');
+        input.value = '';
+        return;
+    }
+    
+    // Store file data
+    proofFileData = file;
+    
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('previewImg').src = e.target.result;
+        document.getElementById('fileName').textContent = file.name;
+        document.getElementById('uploadPreview').style.display = 'flex';
+        document.getElementById('uploadPlaceholder').style.display = 'none';
+        document.getElementById('uploadArea').classList.add('has-file');
+        
+        // Enable Review button
+        document.getElementById('reviewBtn').disabled = false;
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeFile() {
+    // Clear file input
+    document.getElementById('proofFile').value = '';
+    
+    // Hide preview
+    document.getElementById('uploadPreview').style.display = 'none';
+    document.getElementById('uploadPlaceholder').style.display = 'block';
+    document.getElementById('uploadArea').classList.remove('has-file');
+    
+    // Clear file data
+    proofFileData = null;
+    
+    // Disable Review button
+    document.getElementById('reviewBtn').disabled = true;
+}
+
+// Update goToStep3 to validate proof of payment
+function goToStep3() {
+    const court = document.querySelector('input[name="court"]:checked');
+    const date = document.getElementById('bookingDate').value;
+    const payment = document.querySelector('input[name="payment"]:checked');
+    
+    if (!court) { alert('Please select a court'); return false; }
+    if (!date) { alert('Please select a date'); return false; }
+    if (!selectedTime) { alert('Please select a time slot'); return false; }
+    if (!payment) { alert('Please select a payment method'); return false; }
+    if (!proofFileData) { alert('Please upload proof of payment'); return false; }
+    
+    // Store data
+    bookingData.court = court.value;
+    bookingData.date = date;
+    bookingData.time = selectedTime;
+    bookingData.payment = payment.value;
+    bookingData.proofFile = proofFileData.name;
+    
+    // Show summary
+    document.getElementById('summaryName').textContent = bookingData.firstName;
+    document.getElementById('summaryEmail').textContent = bookingData.email;
+    document.getElementById('summaryCourt').textContent = bookingData.court;
+    document.getElementById('summaryPayment').textContent = bookingData.payment;
+    document.getElementById('summaryProof').textContent = bookingData.proofFile;
+    
+    const formattedDate = new Date(bookingData.date).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    document.getElementById('summaryDateTime').textContent = formattedDate + ' · ' + bookingData.time;
+    
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step3').classList.add('active');
+    document.getElementById('currentStepNum').textContent = '3';
+    currentStep = 3;
+    
+    return true;
+}
