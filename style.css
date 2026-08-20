@@ -964,3 +964,526 @@ ul {
         flex-direction: row !important;
     }
 }
+
+/* ===== ApexFit-Style Booking System ===== */
+.booking {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+    min-height: 100vh;
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.booking-header .section-title {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.booking-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
+}
+
+/* Progress Steps */
+.booking-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.progress-step.active .step-number {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(45, 90, 39, 0.4);
+}
+
+.step-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.progress-step.active .step-label {
+    color: white;
+}
+
+.progress-line {
+    width: 100px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 15px;
+    margin-bottom: 35px;
+}
+
+/* Step Content */
+.booking-step {
+    max-width: 700px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease;
+}
+
+.step-content h3 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.step-content > p {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Form Styles */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group label i {
+    color: var(--accent);
+}
+
+.form-group input {
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-block {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.05rem;
+    margin-top: 10px;
+}
+
+.form-privacy {
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 15px;
+}
+
+.form-privacy i {
+    color: var(--success);
+}
+
+/* Court Selection */
+.court-selection,
+.time-selection {
+    margin-bottom: 30px;
+}
+
+.court-selection h4,
+.time-selection h4 {
+    color: white;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.court-selection h4 i,
+.time-selection h4 i {
+    color: var(--accent);
+}
+
+.court-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.court-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.court-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(45, 90, 39, 0.5);
+}
+
+.court-card input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.court-card input[type="radio"]:checked + .court-info {
+    color: white;
+}
+
+.court-info {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.court-info strong {
+    display: block;
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+}
+
+.court-price {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Time Slots */
+.time-slots h5 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.time-slot {
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.time-slot:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(45, 90, 39, 0.5);
+}
+
+.time-slot.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* Step Actions */
+.step-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.step-actions .btn {
+    flex: 1;
+}
+
+/* Confirmation Box */
+.confirmation-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-icon i {
+    font-size: 3rem;
+    color: var(--success);
+}
+
+.success-icon.large {
+    width: 120px;
+    height: 120px;
+}
+
+.success-icon.large i {
+    font-size: 4.5rem;
+}
+
+.confirmation-box h3 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.confirmation-box > p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 30px;
+}
+
+/* Booking Summary */
+.booking-summary {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.booking-summary h4 {
+    color: white;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.booking-summary h4 i {
+    color: var(--accent);
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+}
+
+.summary-item i {
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-top: 3px;
+}
+
+.summary-item .label {
+    display: block;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin-bottom: 3px;
+}
+
+.summary-item .value {
+    display: block;
+    color: white;
+    font-weight: 500;
+}
+
+.summary-item .value.price {
+    color: var(--success);
+    font-size: 1.2rem;
+}
+
+/* Booking Notes */
+.booking-notes {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.booking-notes h5 {
+    color: white;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.booking-notes h5 i {
+    color: var(--warning);
+}
+
+.booking-notes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.booking-notes li {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+.booking-notes li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+.booking-notice {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.booking-notice i {
+    color: var(--accent);
+}
+
+/* Booking Success */
+.booking-success {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.booking-success h3 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.booking-success > p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.next-steps {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.next-steps h4 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.next-steps p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .booking-progress {
+        flex-wrap: wrap;
+    }
+    
+    .progress-line {
+        display: none;
+    }
+    
+    .progress-step {
+        flex: 1;
+        min-width: 80px;
+        margin: 10px;
+    }
+    
+    .slots-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .step-actions {
+        flex-direction: column;
+    }
+    
+    .confirmation-box {
+        padding: 25px;
+    }
+    
+    .summary-item {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
