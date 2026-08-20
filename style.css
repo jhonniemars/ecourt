@@ -857,3 +857,65 @@ ul {
     .hero-buttons { flex-direction: column; align-items: center; }
     .btn { width: 100%; max-width: 280px; justify-content: center; }
 }
+
+/* ===== Payment Method Section ===== */
+.payment-method-section {
+    margin-bottom: 25px;
+}
+
+.payment-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.payment-title i {
+    color: var(--primary);
+}
+
+.payment-option {
+    cursor: pointer;
+    display: block;
+}
+
+.payment-option input[type="radio"] {
+    display: none;
+}
+
+.payment-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f9fafb;
+    transition: all 0.3s ease;
+}
+
+.payment-option input[type="radio"]:checked + .payment-card {
+    border-color: var(--primary);
+    background: rgba(45, 90, 39, 0.05);
+    box-shadow: 0 0 0 4px rgba(45, 90, 39, 0.1);
+}
+
+.payment-info strong {
+    display: block;
+    color: #1f2937;
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.payment-info span {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.payment-icon {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
