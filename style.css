@@ -1331,3 +1331,38 @@ ul {
         letter-spacing: 6px;
     }
 }
+
+/* ===== COMPLETE SPACING FIX ===== */
+.booking {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+.booking-header-text {
+    margin-bottom: 15px !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.reserve-title {
+    margin-bottom: 15px !important;
+    line-height: 1.2 !important;
+}
+
+.booking-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.booking-card {
+    margin-top: 0 !important;
+    padding-top: 30px !important;
+}
+
+/* Remove any hidden spacers */
+.booking > .container,
+.booking > div {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
