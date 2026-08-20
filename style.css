@@ -1092,3 +1092,73 @@ ul {
         transform: translateY(0);
     }
 }
+
+/* ========================================= */
+/* FORCE HORIZONTAL LAYOUT (Paste at bottom) */
+/* ========================================= */
+
+/* 1. Force Booking Form to be Horizontal */
+.booking-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px;
+}
+
+.booking-form .form-row {
+    display: flex !important;
+    flex-direction: row !important; /* Forces side-by-side */
+    gap: 20px;
+    width: 100%;
+}
+
+.booking-form .form-row .form-group {
+    flex: 1 !important; /* Makes both inputs equal width */
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-form .form-group.full-width {
+    width: 100%;
+}
+
+.booking-form .form-submit {
+    text-align: center;
+    width: 100%;
+}
+
+/* 2. Force Footer to be Horizontal */
+.footer-content {
+    display: flex !important;
+    flex-direction: row !important; /* Forces side-by-side */
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 40px;
+    width: 100%;
+}
+
+.footer-brand {
+    flex: 2 !important; /* Takes up more space */
+    min-width: 250px;
+}
+
+.footer-links, 
+.footer-social {
+    flex: 1 !important; /* Takes up less space */
+    min-width: 150px;
+}
+
+.footer-links ul {
+    padding: 0;
+    margin: 0;
+}
+
+/* 3. Ensure it stays horizontal on Desktop/Tablet */
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row !important;
+    }
+    
+    .booking-form .form-row {
+        flex-direction: row !important;
+    }
+}
