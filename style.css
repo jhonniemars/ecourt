@@ -455,7 +455,7 @@ ul {
 
 /* ===== Booking Section ===== */
 .booking {
-    padding: 100px 0;
+    padding: 40px 0;
     background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
     color: var(--white);
 }
@@ -894,16 +894,13 @@ ul {
     justify-content: center;
 }
 
-.booking-container {
-    width: 100%;
-    max-width: 600px;
+.booking .container {
+    padding-top: 0 !important;
 }
 
 .booking-card {
-    background: white;
-    border-radius: 20px;
-    padding: 50px 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    margin-top: 0 !important;
+    padding-top: 40px !important;
 }
 
 /* Step Indicator */
@@ -1311,8 +1308,8 @@ ul {
 /* ===== RESERVE YOUR SPOT Header - Fixed ===== */
 .booking-header-text {
     text-align: center !important;
-    margin-bottom: 30px;
-    padding-top: 20px;
+    margin-bottom: 10px;
+    padding-top: 10px;
     width: 100%;
 }
 
