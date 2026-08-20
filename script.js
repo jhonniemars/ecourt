@@ -160,3 +160,184 @@ window.addEventListener('scroll', () => {
 console.log('%c🎾 Welcome to E.Court!', 'color: #2d5a27; font-size: 20px; font-weight: bold;');
 console.log('%cPlay • Snack • Connect', 'color: #c4956a; font-size: 14px;');
 console.log('%cGuanzon-Gundaya St. Brgy. 6, Gingoog City', 'color: #6b7280; font-size: 12px;');
+
+// ===== Multi-Step Booking System =====
+let currentStep = 1;
+let selectedTime = null;
+let bookingData = {};
+
+// Set minimum date to today
+document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('bookingDate');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    }
+});
+
+function nextStep(step) {
+    // Validate current step
+    if (step === 2 && !validateStep1()) {
+        return;
+    }
+    
+    if (step === 3 && !validateStep2()) {
+        return;
+    }
+    
+    // Hide current step
+    document.getElementById(`step${currentStep}`).style.display = 'none';
+    
+    // Show next step
+    document.getElementById(`step${step}`).style.display = 'block';
+    
+    // Update progress indicator
+    updateProgress(step);
+    
+    currentStep = step;
+    
+    // If moving to step 3, populate summary
+    if (step === 3) {
+        populateSummary();
+    }
+    
+    // Smooth scroll to booking section
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+}
+
+function previousStep(step) {
+    document.getElementById(`step${currentStep}`).style.display = 'none';
+    document.getElementById(`step${step}`).style.display = 'block';
+    updateProgress(step);
+    currentStep = step;
+}
+
+function updateProgress(step) {
+    const steps = document.querySelectorAll('.progress-step');
+    steps.forEach((s, index) => {
+        if (index < step) {
+            s.classList.add('active');
+        } else {
+            s.classList.remove('active');
+        }
+    });
+}
+
+function validateStep1() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    
+    if (!firstName) {
+        alert('Please enter your first name');
+        return false;
+    }
+    
+    if (!email || !isValidEmail(email)) {
+        alert('Please enter a valid email address');
+        return false;
+    }
+    
+    if (!phone) {
+        alert('Please enter your phone number');
+        return false;
+    }
+    
+    bookingData.firstName = firstName;
+    bookingData.email = email;
+    bookingData.phone = phone;
+    
+    return true;
+}
+
+function validateStep2() {
+    const court = document.querySelector('input[name="court"]:checked');
+    const date = document.getElementById('bookingDate').value;
+    
+    if (!court) {
+        alert('Please select a court');
+        return false;
+    }
+    
+    if (!date) {
+        alert('Please select a date');
+        return false;
+    }
+    
+    if (!selectedTime) {
+        alert('Please select a time slot');
+        return false;
+    }
+    
+    bookingData.court = court.value;
+    bookingData.date = date;
+    bookingData.time = selectedTime;
+    
+    return true;
+}
+
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Time slot selection
+document.addEventListener('DOMContentLoaded', function() {
+    const timeSlots = document.querySelectorAll('.time-slot');
+    timeSlots.forEach(slot => {
+        slot.addEventListener('click', function() {
+            timeSlots.forEach(s => s.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedTime = this.dataset.time;
+        });
+    });
+});
+
+function populateSummary() {
+    document.getElementById('summaryName').textContent = bookingData.firstName;
+    document.getElementById('summaryEmail').textContent = bookingData.email;
+    document.getElementById('summaryPhone').textContent = bookingData.phone;
+    document.getElementById('summaryCourt').textContent = bookingData.court;
+    
+    const formattedDate = new Date(bookingData.date).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    document.getElementById('summaryDateTime').textContent = `${formattedDate} · ${bookingData.time}`;
+}
+
+function submitBooking() {
+    // Here you would normally send data to a server
+    // For now, we'll just show the success message
+    
+    // Create booking message for Instagram/Messenger
+    const bookingMessage = `
+🎾 NEW BOOKING - E.Court
+
+Name: ${bookingData.firstName}
+Email: ${bookingData.email}
+Phone: ${bookingData.phone}
+Court: ${bookingData.court}
+Date: ${bookingData.date}
+Time: ${bookingData.time}
+Price: ₱300/hour
+    `.trim();
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(bookingMessage).then(() => {
+        alert('✅ Booking details copied!\n\nPlease send this to our Instagram (@ecourt.gingoog) or Facebook Messenger to confirm your reservation.');
+    }).catch(() => {
+        // Fallback
+        console.log(bookingMessage);
+    });
+    
+    // Show success screen
+    document.getElementById('step3').style.display = 'none';
+    document.getElementById('bookingProgress').style.display = 'none';
+    document.getElementById('bookingSuccess').style.display = 'block';
+    
+    // Scroll to top
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+}
