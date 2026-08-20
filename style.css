@@ -402,22 +402,20 @@ ul {
 }
 
 .booking-header-text {
-    text-align: center !important;
-    margin: 0 0 20px 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
+    margin-bottom: 10px !important;
+    margin-top: 0 !important;
+    padding-top: 10px !important;
+    padding-bottom: 0 !important;
 }
 
 .reserve-title {
-    font-size: 2.5rem !important;
-    font-weight: 800 !important;
+    font-size: 3.5rem !important; /* Increased size */
+    font-weight: 900 !important;   /* Bolder */
     letter-spacing: 6px !important;
     color: #2d5a27 !important;
-    text-transform: uppercase !important;
     margin: 0 !important;
     padding: 0 !important;
-    line-height: 1.2 !important;
-    display: block !important;
+    line-height: 1.1 !important;
 }
 
 .booking-container {
@@ -1242,5 +1240,13 @@ ul {
     
     .preview-info {
         text-align: center;
+    }
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+    .reserve-title {
+        font-size: 2.2rem !important;
+        letter-spacing: 3px !important;
     }
 }
