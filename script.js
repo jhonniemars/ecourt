@@ -83,28 +83,28 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function goToStep2() {
-    // Validate Step 1
+    // Validate Step 1 (UPDATED - removed phone validation)
     const firstName = document.getElementById('firstName').value.trim();
     const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
+    // Phone field removed - no longer validating
     
-    if (!firstName || !email || !phone) {
-        alert('Please fill in all fields');
+    if (!firstName) {
+        alert('Please enter your first name');
         return;
     }
     
-    if (!isValidEmail(email)) {
+    if (!email || !isValidEmail(email)) {
         alert('Please enter a valid email address');
         return;
     }
     
+    // Store data (removed phone)
     bookingData.firstName = firstName;
     bookingData.email = email;
-    bookingData.phone = phone;
     
     // Switch to Step 2
     document.getElementById('step1').classList.remove('active');
-    document.getElementById('step2').classList.add('active');
+    document.getElementById('step2').classList.add
     document.getElementById('currentStepNum').textContent = '2';
     currentStep = 2;
 }
