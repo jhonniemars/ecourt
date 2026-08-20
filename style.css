@@ -401,23 +401,6 @@ ul {
     display: block !important; /* Prevents vertical centering gaps */
 }
 
-.booking-header-text {
-    margin-bottom: 10px !important;
-    margin-top: 0 !important;
-    padding-top: 10px !important;
-    padding-bottom: 0 !important;
-}
-
-.reserve-title {
-    font-size: 3.5rem !important; /* Increased size */
-    font-weight: 900 !important;   /* Bolder */
-    letter-spacing: 6px !important;
-    color: #2d5a27 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 1.1 !important;
-}
-
 .booking-container {
     max-width: 650px !important;
     margin: 0 auto !important;
