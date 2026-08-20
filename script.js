@@ -58,79 +58,147 @@ document.querySelectorAll('.service-card, .contact-card, .about-grid, .gallery-i
     observer.observe(el);
 });
 
-// ===== Set Minimum Date for Booking =====
-const dateInput = document.getElementById('date');
-if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
-}
+// ===== Multi-Step Booking System =====
+let currentStep = 1;
+let selectedTime = null;
+let bookingData = {};
 
-// ===== Booking Form Submission =====
-const bookingForm = document.getElementById('bookingForm');
-
-bookingForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(bookingForm);
-    const data = Object.fromEntries(formData);
-
-    // Build message for Instagram/Messenger
-    const message = `
-🎾 NEW BOOKING REQUEST - E.Court
-
- Name: ${data.name}
-📞 Contact: ${data.phone}
- Date: ${data.date}
-⏰ Time: ${data.time}
-👥 Players: ${data.players}
-🏓 Courts: ${data.courts}
-📝 Notes: ${data.notes || 'None'}
-    `.trim();
-
-    // Copy to clipboard
-    navigator.clipboard.writeText(message).then(() => {
-        alert('✅ Booking details copied to clipboard!\n\nPlease paste this message in our Instagram DM or Facebook Messenger to confirm your booking.\n\n📱 Instagram: @ecourt.gingoog\n💬 Facebook Messenger: E.Court');
-    }).catch(() => {
-        alert('✅ Booking request received!\n\nPlease send us a message on Instagram or Facebook Messenger with your booking details to confirm.\n\n📱 Instagram: @ecourt.gingoog\n💬 Facebook Messenger: E.Court');
+// Set minimum date to today
+document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('bookingDate');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    }
+    
+    // Time slot selection
+    const timeSlots = document.querySelectorAll('.time-slot-btn');
+    timeSlots.forEach(slot => {
+        slot.addEventListener('click', function() {
+            timeSlots.forEach(s => s.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedTime = this.dataset.time;
+        });
     });
-
-    // Show success message
-    const formSection = document.querySelector('.booking-form-section');
-    const successDiv = document.createElement('div');
-    successDiv.className = 'success-message show';
-    successDiv.innerHTML = `
-        <i class="fas fa-check-circle"></i>
-        <h3>Booking Request Submitted!</h3>
-        <p>Your details have been copied to clipboard. Please send this message via Instagram DM or Facebook Messenger to confirm your booking.</p>
-    `;
-
-    // Remove existing success message if any
-    const existing = formSection.querySelector('.success-message');
-    if (existing) existing.remove();
-
-    formSection.appendChild(successDiv);
-
-    // Reset form
-    bookingForm.reset();
-
-    // Scroll to success message
-    successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-    // Auto-hide after 8 seconds
-    setTimeout(() => {
-        successDiv.style.opacity = '0';
-        setTimeout(() => successDiv.remove(), 500);
-    }, 8000);
 });
 
-// ===== Smooth Scroll for all anchor links =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
+function goToStep2() {
+    // Validate Step 1
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    
+    if (!firstName || !email || !phone) {
+        alert('Please fill in all fields');
+        return;
+    }
+    
+    if (!isValidEmail(email)) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    bookingData.firstName = firstName;
+    bookingData.email = email;
+    bookingData.phone = phone;
+    
+    // Switch to Step 2
+    document.getElementById('step1').classList.remove('active');
+    document.getElementById('step2').classList.add('active');
+    document.getElementById('currentStepNum').textContent = '2';
+    currentStep = 2;
+}
+
+function goToStep1() {
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step1').classList.add('active');
+    document.getElementById('currentStepNum').textContent = '1';
+    currentStep = 1;
+}
+
+function goToStep3() {
+    // Validate Step 2
+    const court = document.querySelector('input[name="court"]:checked');
+    const date = document.getElementById('bookingDate').value;
+    
+    if (!court) {
+        alert('Please select a court');
+        return;
+    }
+    
+    if (!date) {
+        alert('Please select a date');
+        return;
+    }
+    
+    if (!selectedTime) {
+        alert('Please select a time slot');
+        return;
+    }
+    
+    bookingData.court = court.value;
+    bookingData.date = date;
+    bookingData.time = selectedTime;
+    
+    // Populate summary
+    document.getElementById('summaryName').textContent = bookingData.firstName;
+    document.getElementById('summaryEmail').textContent = bookingData.email;
+    document.getElementById('summaryPhone').textContent = bookingData.phone;
+    document.getElementById('summaryCourt').textContent = bookingData.court;
+    
+    const formattedDate = new Date(bookingData.date).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    document.getElementById('summaryDateTime').textContent = `${formattedDate} · ${bookingData.time}`;
+    
+    // Switch to Step 3
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step3').classList.add('active');
+    document.getElementById('currentStepNum').textContent = '3';
+    currentStep = 3;
+}
+
+function goToStep2FromEdit() {
+    document.getElementById('step3').classList.remove('active');
+    document.getElementById('step2').classList.add('active');
+    document.getElementById('currentStepNum').textContent = '2';
+    currentStep = 2;
+}
+
+function confirmBooking() {
+    // Create booking message
+    const bookingMessage = `
+🎾 NEW BOOKING - E.Court
+
+Name: ${bookingData.firstName}
+Email: ${bookingData.email}
+Phone: ${bookingData.phone}
+Court: ${bookingData.court}
+Date: ${bookingData.date}
+Time: ${bookingData.time}
+Price: ₱300/hour
+    `.trim();
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(bookingMessage).then(() => {
+        alert('✅ Booking details copied!\n\nPlease send this to our Instagram (@ecourt.gingoog) or Facebook Messenger to confirm.');
+    }).catch(() => {
+        console.log(bookingMessage);
+    });
+    
+    // Show success
+    document.getElementById('step3').classList.remove('active');
+    document.getElementById('successStep').classList.add('active');
+    document.querySelector('.step-indicator').style.display = 'none';
+}
+
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
     });
 });
 
