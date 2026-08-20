@@ -180,77 +180,237 @@
 </table>
             </div>
 
-            <!-- Booking Form -->
-            <div class="booking-form-section">
-                <h3 class="schedule-title"><i class="fas fa-calendar-plus"></i> Book a Schedule</h3>
+<!-- Booking Section -->
+<section class="booking" id="booking">
+    <div class="container">
+        <div class="booking-header">
+            <h2 class="section-title">Book Your Court</h2>
+            <p class="booking-subtitle">Reserve your pickleball court in 3 easy steps</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="booking-progress" id="bookingProgress">
+            <div class="progress-step active" data-step="1">
+                <span class="step-number">1</span>
+                <span class="step-label">Your Info</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+                <span class="step-number">2</span>
+                <span class="step-label">Select Court</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+                <span class="step-number">3</span>
+                <span class="step-label">Confirm</span>
+            </div>
+        </div>
+
+        <!-- Step 1: Contact Information -->
+        <div class="booking-step" id="step1">
+            <div class="step-content">
+                <h3>You're One Step Away</h3>
+                <p>Just tell us where to send your confirmation — then pick your court and time.</p>
+                
                 <form class="booking-form" id="bookingForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name"><i class="fas fa-user"></i> Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone"><i class="fas fa-phone"></i> Contact Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="09XX XXX XXXX" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="firstName">
+                            <i class="fas fa-user"></i> First Name
+                        </label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Your first name" required>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="date"><i class="fas fa-calendar-day"></i> Preferred Date</label>
-                            <input type="date" id="date" name="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="time"><i class="fas fa-clock"></i> Preferred Time Slot</label>
-                            <select id="time" name="time" required>
-                                <option value="">Select a time slot</option>
-                                <option value="6:00 AM - 8:00 AM">6:00 AM – 8:00 AM</option>
-                                <option value="8:00 AM - 10:00 AM">8:00 AM – 10:00 AM</option>
-                                <option value="10:00 AM - 12:00 PM">10:00 AM – 12:00 PM</option>
-                                <option value="12:00 PM - 2:00 PM">12:00 PM – 2:00 PM</option>
-                                <option value="2:00 PM - 4:00 PM">2:00 PM – 4:00 PM</option>
-                                <option value="4:00 PM - 6:00 PM">4:00 PM – 6:00 PM</option>
-                                <option value="6:00 PM - 8:00 PM">6:00 PM – 8:00 PM</option>
-                                <option value="8:00 PM - 10:00 PM">8:00 PM – 10:00 PM</option>
-                            </select>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="players"><i class="fas fa-users"></i> Number of Players</label>
-                            <select id="players" name="players" required>
-                                <option value="">Select number of players</option>
-                                <option value="2">2 Players (Singles)</option>
-                                <option value="4">4 Players (Doubles)</option>
-                                <option value="6+">6+ Players (Group)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="courts"><i class="fas fa-table-tennis-paddle-ball"></i> Number of Courts</label>
-                            <select id="courts" name="courts" required>
-                                <option value="">Select number of courts</option>
-                                <option value="1">1 Court</option>
-                                <option value="2">2 Courts</option>
-                                <option value="3">3 Courts</option>
-                            </select>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">
+                            <i class="fas fa-phone"></i> Phone Number
+                        </label>
+                        <input type="tel" id="phone" name="phone" placeholder="09XX XXX XXXX" required>
                     </div>
-                    <div class="form-group full-width">
-                        <label for="notes"><i class="fas fa-comment"></i> Additional Notes</label>
-                        <textarea id="notes" name="notes" rows="3" placeholder="Any special requests or notes..."></textarea>
-                    </div>
-                    <div class="form-submit">
-                        <button type="submit" class="btn btn-primary btn-large">
-                            <i class="fas fa-paper-plane"></i> Submit Booking Request
-                        </button>
-                    </div>
+
+                    <button type="button" class="btn btn-primary btn-block" onclick="nextStep(2)">
+                        Continue to Court Selection <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <p class="form-privacy">
+                        <i class="fas fa-lock"></i> Your info is safe. We don't spam. Ever.
+                    </p>
                 </form>
-                <div class="booking-note">
-                    <i class="fas fa-info-circle"></i>
-                    <p>Bookings/Reservations are thru <strong>Instagram/Messenger only</strong>. After submitting this form, we'll confirm your booking via DM. For faster response, message us directly on Instagram or Facebook!</p>
+            </div>
+        </div>
+
+        <!-- Step 2: Court & Time Selection -->
+        <div class="booking-step" id="step2" style="display: none;">
+            <div class="step-content">
+                <h3>Select Your Court & Time</h3>
+                <p>Choose your preferred court and time slot.</p>
+
+                <div class="court-selection">
+                    <h4><i class="fas fa-table-tennis-paddle-ball"></i> Select Court</h4>
+                    <div class="court-options">
+                        <label class="court-card">
+                            <input type="radio" name="court" value="Court 1" checked>
+                            <div class="court-info">
+                                <strong>Court 1</strong>
+                                <span>Standard Pickleball Court</span>
+                            </div>
+                            <span class="court-price">₱300/hour</span>
+                        </label>
+                        <label class="court-card">
+                            <input type="radio" name="court" value="Court 2">
+                            <div class="court-info">
+                                <strong>Court 2</strong>
+                                <span>Standard Pickleball Court</span>
+                            </div>
+                            <span class="court-price">₱300/hour</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="time-selection">
+                    <h4><i class="fas fa-calendar-day"></i> Select Date & Time</h4>
+                    
+                    <div class="form-group">
+                        <label for="bookingDate">
+                            <i class="fas fa-calendar"></i> Date
+                        </label>
+                        <input type="date" id="bookingDate" name="bookingDate" required>
+                    </div>
+
+                    <div class="time-slots" id="timeSlots">
+                        <h5>Available Times</h5>
+                        <div class="slots-grid">
+                            <button class="time-slot" data-time="6:00 AM - 8:00 AM">6:00 AM - 8:00 AM</button>
+                            <button class="time-slot" data-time="8:00 AM - 10:00 AM">8:00 AM - 10:00 AM</button>
+                            <button class="time-slot" data-time="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</button>
+                            <button class="time-slot" data-time="12:00 PM - 2:00 PM">12:00 PM - 2:00 PM</button>
+                            <button class="time-slot" data-time="2:00 PM - 4:00 PM">2:00 PM - 4:00 PM</button>
+                            <button class="time-slot" data-time="4:00 PM - 6:00 PM">4:00 PM - 6:00 PM</button>
+                            <button class="time-slot" data-time="6:00 PM - 8:00 PM">6:00 PM - 8:00 PM</button>
+                            <button class="time-slot" data-time="8:00 PM - 10:00 PM">8:00 PM - 10:00 PM</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-actions">
+                    <button class="btn btn-outline" onclick="previousStep(1)">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+                        Review Booking <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
+
+        <!-- Step 3: Confirmation -->
+        <div class="booking-step" id="step3" style="display: none;">
+            <div class="confirmation-box">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>You're All Set!</h3>
+                <p>Your court reservation is ready. Review your details below:</p>
+
+                <div class="booking-summary">
+                    <h4><i class="fas fa-clipboard-list"></i> Booking Summary</h4>
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <i class="fas fa-user"></i>
+                            <div>
+                                <span class="label">Name</span>
+                                <span class="value" id="summaryName">-</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="label">Email</span>
+                                <span class="value" id="summaryEmail">-</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <span class="label">Phone</span>
+                                <span class="value" id="summaryPhone">-</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-table-tennis-paddle-ball"></i>
+                            <div>
+                                <span class="label">Court</span>
+                                <span class="value" id="summaryCourt">-</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-calendar"></i>
+                            <div>
+                                <span class="label">Date & Time</span>
+                                <span class="value" id="summaryDateTime">-</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <span class="label">Total Price</span>
+                                <span class="value price" id="summaryPrice">₱300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-notes">
+                    <h5><i class="fas fa-info-circle"></i> What to Expect:</h5>
+                    <ul>
+                        <li>Confirmation will be sent to your email and phone</li>
+                        <li>Arrive 10 minutes before your scheduled time</li>
+                        <li>Bring your own paddle or rent one at the counter</li>
+                        <li>Free parking available on-site</li>
+                    </ul>
+                </div>
+
+                <div class="step-actions">
+                    <button class="btn btn-outline" onclick="previousStep(2)">
+                        <i class="fas fa-arrow-left"></i> Edit
+                    </button>
+                    <button type="button" class="btn btn-primary btn-large" onclick="submitBooking()">
+                        <i class="fas fa-check"></i> Confirm Booking
+                    </button>
+                </div>
+
+                <p class="booking-notice">
+                    <i class="fas fa-info-circle"></i> 
+                    You'll receive a confirmation message via Instagram/Messenger within 15 minutes.
+                </p>
+            </div>
+        </div>
+
+        <!-- Success Message (Hidden by default) -->
+        <div class="booking-success" id="bookingSuccess" style="display: none;">
+            <div class="success-icon large">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>🎉 You're Booked!</h3>
+            <p>Check your email for the confirmation details. We're excited to see you on the court!</p>
+            
+            <div class="next-steps">
+                <h4>While You Wait:</h4>
+                <p>Follow us for pickleball tips and updates → <strong>@ecourt.gingoog</strong></p>
+            </div>
+
+            <button class="btn btn-primary" onclick="location.reload()">
+                <i class="fas fa-plus"></i> Book Another Court
+            </button>
+        </div>
+    </div>
+</section>
     
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
