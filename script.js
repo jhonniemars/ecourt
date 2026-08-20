@@ -124,3 +124,27 @@ function confirmBooking() {
 function isValidEmail(email) {
     return email.indexOf('@') > 0 && email.indexOf('.') > 0;
 }
+
+// ===== Toggle QR Code Display =====
+function toggleQRCode() {
+    const gcashRadio = document.querySelector('input[name="payment"][value="GCash"]');
+    const qrContainer = document.getElementById('gcashQR');
+    
+    if (gcashRadio && gcashRadio.checked) {
+        qrContainer.classList.add('show');
+    } else {
+        qrContainer.classList.remove('show');
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Show QR if GCash is already checked
+    toggleQRCode();
+    
+    // Add event listener to payment radio buttons
+    const paymentRadios = document.querySelectorAll('input[name="payment"]');
+    paymentRadios.forEach(radio => {
+        radio.addEventListener('change', toggleQRCode);
+    });
+});
