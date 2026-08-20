@@ -1,3 +1,12 @@
+// ===== Always Go to Home on Load =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Scroll to home immediately
+    window.location.href = '#home';
+    
+    // Reset booking form
+    resetBookingForm();
+});
+
 // ===== Booking System Variables =====
 let currentStep = 1;
 let selectedTime = null;
