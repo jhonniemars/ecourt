@@ -441,3 +441,33 @@ Payment: ${bookingData.payment}`;
         window.location.href = '#home';
     });
 }
+
+// ===== Toggle QR Code Display =====
+function toggleQRCode() {
+    const gcashRadio = document.getElementById('gcashRadio');
+    const qrContainer = document.getElementById('gcashQR');
+    const dynamicQrPrice = document.getElementById('dynamicQrPrice');
+    
+    if (!gcashRadio || !qrContainer) return;
+    
+    if (gcashRadio.checked) {
+        qrContainer.style.display = 'block';
+        // Update price if available
+        if (dynamicQrPrice && bookingData.totalPrice > 0) {
+            dynamicQrPrice.textContent = '₱' + bookingData.totalPrice.toLocaleString();
+        }
+    } else {
+        qrContainer.style.display = 'none';
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // ... your existing code ...
+    
+    // Show QR if GCash is already checked on load
+    const gcashRadio = document.getElementById('gcashRadio');
+    if (gcashRadio && gcashRadio.checked) {
+        toggleQRCode();
+    }
+});
