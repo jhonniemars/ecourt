@@ -1,163 +1,147 @@
-// ===== Booking System Variables =====
-let currentStep = 1;
-let selectedTime = null;
-let bookingData = {
+// ===== Global Variables =====
+var currentStep = 1;
+var selectedTime = null;
+var bookingData = {
     duration: 0,
     totalPrice: 0,
     startTime: 0,
-    endTime: 0
+    endTime: 0,
+    firstName: '',
+    email: '',
+    court: '',
+    date: '',
+    payment: ''
 };
 
-// ===== Initialize on Page Load =====
+// ===== Initialize Page =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Set minimum date to today
-    const dateInput = document.getElementById('bookingDate');
+    // Set min date to today
+    var dateInput = document.getElementById('bookingDate');
     if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
+        var today = new Date().toISOString().split('T')[0];
         dateInput.setAttribute('min', today);
     }
     
-    // Add time range event listeners
-    const startTime = document.getElementById('startTime');
-    const endTime = document.getElementById('endTime');
+    // Add event listeners for time inputs
+    var startTimeInput = document.getElementById('startTime');
+    var endTimeInput = document.getElementById('endTime');
     
-    if (startTime) {
-        startTime.addEventListener('change', calculateDuration);
+    if (startTimeInput) {
+        startTimeInput.addEventListener('change', calculateDuration);
     }
-    if (endTime) {
-        endTime.addEventListener('change', calculateDuration);
+    if (endTimeInput) {
+        endTimeInput.addEventListener('change', calculateDuration);
     }
     
-    // Initialize QR code display
-    const gcashRadio = document.getElementById('gcashRadio');
+    // Initialize GCash QR
+    var gcashRadio = document.getElementById('gcashRadio');
     if (gcashRadio && gcashRadio.checked) {
-        const qrContainer = document.getElementById('gcashQR');
+        var qrContainer = document.getElementById('gcashQR');
         if (qrContainer) {
             qrContainer.style.display = 'block';
         }
     }
+    
+    console.log('E.Court Booking System Loaded');
 });
 
-// ===== Calculate Duration and Price =====
+// ===== Calculate Duration & Price =====
 function calculateDuration() {
-    const startTimeInput = document.getElementById('startTime');
-    const endTimeInput = document.getElementById('endTime');
-    const durationDisplay = document.getElementById('bookingDuration');
-    const durationText = document.getElementById('durationText');
-    const priceAmount = document.getElementById('priceAmount');
-    const dynamicQrPrice = document.getElementById('dynamicQrPrice');
-    const notice = document.getElementById('timeNotice');
-    const noticeText = document.getElementById('noticeText');
+    var startSelect = document.getElementById('startTime');
+    var endSelect = document.getElementById('endTime');
+    var durationDiv = document.getElementById('bookingDuration');
+    var durationText = document.getElementById('durationText');
+    var priceAmount = document.getElementById('priceAmount');
+    var qrPrice = document.getElementById('dynamicQrPrice');
+    var notice = document.getElementById('timeNotice');
+    var noticeText = document.getElementById('noticeText');
     
-    if (!startTimeInput || !endTimeInput) {
+    if (!startSelect || !endSelect) {
         return;
     }
     
-    const startHour = parseInt(startTimeInput.value);
-    const endHour = parseInt(endTimeInput.value);
+    var startHour = parseInt(startSelect.value);
+    var endHour = parseInt(endSelect.value);
     
     if (!startHour || !endHour) {
-        if (durationDisplay) durationDisplay.style.display = 'none';
+        if (durationDiv) durationDiv.style.display = 'none';
         if (notice) notice.style.display = 'none';
-        selectedTime = null;
-        bookingData.duration = 0;
-        bookingData.totalPrice = 0;
         return;
     }
     
-    const hours = endHour - startHour;
+    var hours = endHour - startHour;
     
+    // Validation
     if (hours <= 0) {
-        if (durationDisplay) durationDisplay.style.display = 'block';
         if (notice) {
             notice.className = 'time-notice error';
-            noticeText.textContent = 'End time must be after start time';
             notice.style.display = 'flex';
+            if (noticeText) noticeText.textContent = 'End time must be after start time';
         }
-        selectedTime = null;
-        bookingData.duration = 0;
-        bookingData.totalPrice = 0;
-        if (dynamicQrPrice) dynamicQrPrice.textContent = '₱0.00';
         return;
     }
     
     if (hours < 2) {
-        if (durationDisplay) durationDisplay.style.display = 'block';
         if (notice) {
             notice.className = 'time-notice error';
-            noticeText.textContent = 'Minimum booking is 2 hours';
             notice.style.display = 'flex';
+            if (noticeText) noticeText.textContent = 'Minimum booking is 2 hours';
         }
-        selectedTime = null;
-        bookingData.duration = 0;
-        bookingData.totalPrice = 0;
-        if (dynamicQrPrice) dynamicQrPrice.textContent = '₱0.00';
         return;
     }
     
     if (hours > 8) {
-        if (durationDisplay) durationDisplay.style.display = 'block';
         if (notice) {
             notice.className = 'time-notice error';
-            noticeText.textContent = 'Maximum booking is 8 hours';
             notice.style.display = 'flex';
+            if (noticeText) noticeText.textContent = 'Maximum booking is 8 hours';
         }
-        selectedTime = null;
-        bookingData.duration = 0;
-        bookingData.totalPrice = 0;
-        if (dynamicQrPrice) dynamicQrPrice.textContent = '₱0.00';
         return;
     }
     
-    // Calculate price (₱250 per hour)
-    const totalPrice = hours * 250;
+    // Success - Calculate price
+    var totalPrice = hours * 250;
+    var startTimeStr = formatTime(startHour);
+    var endTimeStr = formatTime(endHour);
     
-    // Format time display
-    const startTimeStr = formatTime(startHour);
-    const endTimeStr = formatTime(endHour);
-    
-    // Update display
     if (durationText) {
         durationText.textContent = hours + ' hour' + (hours > 1 ? 's' : '') + ' (' + startTimeStr + ' - ' + endTimeStr + ')';
     }
     if (priceAmount) {
-        priceAmount.textContent = '₱' + totalPrice.toLocaleString();
+        priceAmount.textContent = 'P' + totalPrice.toLocaleString();
     }
-    if (durationDisplay) {
-        durationDisplay.style.display = 'flex';
+    if (durationDiv) {
+        durationDiv.style.display = 'flex';
     }
-    
-    // Success notice
     if (notice) {
         notice.className = 'time-notice success';
-        noticeText.textContent = 'Time slot reserved: ' + startTimeStr + ' to ' + endTimeStr;
         notice.style.display = 'flex';
+        if (noticeText) noticeText.textContent = 'Time slot reserved: ' + startTimeStr + ' to ' + endTimeStr;
+    }
+    if (qrPrice) {
+        qrPrice.textContent = 'P' + totalPrice.toLocaleString();
     }
     
-    // Store booking data
+    // Store data
     selectedTime = startTimeStr + ' - ' + endTimeStr;
     bookingData.startTime = startHour;
     bookingData.endTime = endHour;
     bookingData.duration = hours;
     bookingData.totalPrice = totalPrice;
-    
-    // Update QR price
-    if (dynamicQrPrice) {
-        dynamicQrPrice.textContent = '₱' + totalPrice.toLocaleString();
-    }
 }
 
 function formatTime(hour) {
-    const period = hour >= 12 ? 'PM' : 'AM';
-    const displayHour = hour > 12 ? hour - 12 : (hour === 0 ? 12 : hour);
+    var period = hour >= 12 ? 'PM' : 'AM';
+    var displayHour = hour > 12 ? hour - 12 : hour;
+    if (displayHour === 0) displayHour = 12;
     return displayHour + ':00 ' + period;
 }
 
-// ===== Toggle QR Code Display =====
+// ===== Toggle GCash QR =====
 function toggleQRCode() {
-    const gcashRadio = document.getElementById('gcashRadio');
-    const qrContainer = document.getElementById('gcashQR');
-    const dynamicQrPrice = document.getElementById('dynamicQrPrice');
+    var gcashRadio = document.getElementById('gcashRadio');
+    var qrContainer = document.getElementById('gcashQR');
+    var qrPrice = document.getElementById('dynamicQrPrice');
     
     if (!gcashRadio || !qrContainer) {
         return;
@@ -165,99 +149,265 @@ function toggleQRCode() {
     
     if (gcashRadio.checked) {
         qrContainer.style.display = 'block';
-        if (dynamicQrPrice && bookingData.totalPrice > 0) {
-            dynamicQrPrice.textContent = '₱' + bookingData.totalPrice.toLocaleString();
+        if (qrPrice && bookingData.totalPrice > 0) {
+            qrPrice.textContent = 'P' + bookingData.totalPrice.toLocaleString();
         }
     } else {
         qrContainer.style.display = 'none';
     }
 }
 
-// ===== Step Navigation =====
+// ===== Go to Step 2 =====
 function goToStep2() {
-    console.log("Button clicked! Trying to go to Step 2..."); // This helps us debug
-    
-    // 1. Get the input values
     var nameInput = document.getElementById('firstName');
     var emailInput = document.getElementById('email');
     
-    // 2. Check if inputs exist (prevents silent crashes)
     if (!nameInput || !emailInput) {
-        alert("Error: Could not find the Name or Email fields. Check your HTML IDs.");
+        alert('System error: Missing form fields');
         return;
     }
-
+    
     var firstName = nameInput.value.trim();
     var email = emailInput.value.trim();
-
-    // 3. Validate
-    if (firstName === "") {
-        alert("Please enter your first name.");
+    
+    if (firstName === '') {
+        alert('Please enter your first name');
         return;
     }
-    if (email === "") {
-        alert("Please enter your email address.");
+    
+    if (email === '') {
+        alert('Please enter your email');
         return;
     }
-
-    // 4. Save data
+    
+    // Save data
     bookingData.firstName = firstName;
     bookingData.email = email;
-
-    // 5. Switch Steps
+    
+    // Switch steps
     var step1 = document.getElementById('step1');
     var step2 = document.getElementById('step2');
     var stepNum = document.getElementById('currentStepNum');
-
+    
     if (step1) step1.classList.remove('active');
     if (step2) step2.classList.add('active');
     if (stepNum) stepNum.textContent = '2';
     
     currentStep = 2;
-    console.log("Successfully moved to Step 2!");
 }
 
+// ===== Go to Step 1 =====
 function goToStep1() {
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-    const currentStepNum = document.getElementById('currentStepNum');
+    var step1 = document.getElementById('step1');
+    var step2 = document.getElementById('step2');
+    var stepNum = document.getElementById('currentStepNum');
     
     if (step2) step2.classList.remove('active');
     if (step1) step1.classList.add('active');
-    if (currentStepNum) currentStepNum.textContent = '1';
+    if (stepNum) stepNum.textContent = '1';
     
     currentStep = 1;
 }
 
+// ===== Go to Step 3 =====
 function goToStep3() {
-    const court = document.querySelector('input[name="court"]:checked');
-    const dateInput = document.getElementById('bookingDate');
-    const payment = document.querySelector('input[name="payment"]:checked');
+    var court = document.querySelector('input[name="court"]:checked');
+    var dateInput = document.getElementById('bookingDate');
+    var payment = document.querySelector('input[name="payment"]:checked');
     
     if (!court) {
         alert('Please select a court');
-        return false;
+        return;
     }
     
     if (!dateInput || !dateInput.value) {
         alert('Please select a date');
-        return false;
+        return;
     }
     
     if (!selectedTime) {
         alert('Please select a time range');
-        return false;
+        return;
     }
     
     if (!payment) {
         alert('Please select a payment method');
-        return false;
+        return;
     }
     
-    if (!bookingData.duration || bookingData.duration < 2) {
+    if (bookingData.duration < 2) {
         alert('Please select a valid time range (minimum 2 hours)');
-        return false;
+        return;
     }
     
+    // Save data
     bookingData.court = court.value;
-    booking
+    bookingData.date = dateInput.value;
+    bookingData.payment = payment.value;
+    
+    // Update summary
+    var sumName = document.getElementById('summaryName');
+    var sumEmail = document.getElementById('summaryEmail');
+    var sumCourt = document.getElementById('summaryCourt');
+    var sumPayment = document.getElementById('summaryPayment');
+    var sumDateTime = document.getElementById('summaryDateTime');
+    var sumPrice = document.getElementById('summaryPrice');
+    
+    if (sumName) sumName.textContent = bookingData.firstName;
+    if (sumEmail) sumEmail.textContent = bookingData.email;
+    if (sumCourt) sumCourt.textContent = bookingData.court;
+    if (sumPayment) sumPayment.textContent = bookingData.payment;
+    
+    if (sumDateTime) {
+        var dateObj = new Date(bookingData.date);
+        var formattedDate = dateObj.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        sumDateTime.textContent = formattedDate + ' · ' + selectedTime + ' (' + bookingData.duration + ' hours)';
+    }
+    
+    if (sumPrice) {
+        sumPrice.textContent = 'P' + bookingData.totalPrice.toLocaleString();
+    }
+    
+    // Switch steps
+    var step2 = document.getElementById('step2');
+    var step3 = document.getElementById('step3');
+    var stepNum = document.getElementById('currentStepNum');
+    
+    if (step2) step2.classList.remove('active');
+    if (step3) step3.classList.add('active');
+    if (stepNum) stepNum.textContent = '3';
+    
+    currentStep = 3;
+}
+
+// ===== Confirm Booking =====
+function confirmBooking() {
+    var message = 'NEW BOOKING - E.Court\n\n';
+    message += 'Name: ' + bookingData.firstName + '\n';
+    message += 'Email: ' + bookingData.email + '\n';
+    message += 'Court: ' + bookingData.court + '\n';
+    message += 'Date: ' + bookingData.date + '\n';
+    message += 'Time: ' + selectedTime + '\n';
+    message += 'Duration: ' + bookingData.duration + ' hours\n';
+    message += 'Total: P' + bookingData.totalPrice.toLocaleString() + '\n';
+    message += 'Payment: ' + bookingData.payment;
+    
+    navigator.clipboard.writeText(message).then(function() {
+        alert('Success! Your booking is confirmed.\n\nTotal: P' + bookingData.totalPrice.toLocaleString());
+        resetBookingForm();
+        window.location.href = '#home';
+    }).catch(function(err) {
+        console.error('Copy error:', err);
+        alert('Booking confirmed! Total: P' + bookingData.totalPrice.toLocaleString());
+        resetBookingForm();
+        window.location.href = '#home';
+    });
+}
+
+// ===== Reset Form =====
+function resetBookingForm() {
+    var steps = document.querySelectorAll('.booking-step');
+    steps.forEach(function(step) {
+        step.classList.remove('active');
+    });
+    
+    var step1 = document.getElementById('step1');
+    var stepNum = document.getElementById('currentStepNum');
+    var nameInput = document.getElementById('firstName');
+    var emailInput = document.getElementById('email');
+    var dateInput = document.getElementById('bookingDate');
+    var startSelect = document.getElementById('startTime');
+    var endSelect = document.getElementById('endTime');
+    var durationDiv = document.getElementById('bookingDuration');
+    var notice = document.getElementById('timeNotice');
+    
+    if (step1) step1.classList.add('active');
+    if (stepNum) stepNum.textContent = '1';
+    if (nameInput) nameInput.value = '';
+    if (emailInput) emailInput.value = '';
+    if (dateInput) dateInput.value = '';
+    if (startSelect) startSelect.value = '';
+    if (endSelect) endSelect.value = '';
+    if (durationDiv) durationDiv.style.display = 'none';
+    if (notice) notice.style.display = 'none';
+    
+    selectedTime = null;
+    bookingData = {
+        duration: 0,
+        totalPrice: 0,
+        startTime: 0,
+        endTime: 0,
+        firstName: '',
+        email: '',
+        court: '',
+        date: '',
+        payment: ''
+    };
+    currentStep = 1;
+}
+
+// ===== Navbar Scroll =====
+var navbar = document.getElementById('navbar');
+if (navbar) {
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+}
+
+// ===== Back to Top =====
+var backToTop = document.getElementById('backToTop');
+if (backToTop) {
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    
+    backToTop.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ===== Mobile Menu =====
+var hamburger = document.getElementById('hamburger');
+var navLinks = document.getElementById('navLinks');
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+    
+    var links = document.querySelectorAll('.nav-links a');
+    links.forEach(function(link) {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+}
+
+// ===== Smooth Scroll =====
+var anchors = document.querySelectorAll('a[href^="#"]');
+anchors.forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+console.log('E.Court System Ready');
