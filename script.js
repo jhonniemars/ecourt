@@ -57,6 +57,16 @@ function calculateDuration() {
         if (notice) notice.style.display = 'none';
         return;
     }
+
+    var durationDiv = document.getElementById('bookingDuration');
+var qrDisplay = document.getElementById('qrCodeDisplay');
+
+if (durationDiv) {
+    durationDiv.style.display = 'block';
+}
+if (qrDisplay) {
+    qrDisplay.style.display = 'block';
+}
     
     var hours = endHour - startHour;
 
