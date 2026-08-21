@@ -213,11 +213,11 @@
 <!-- Payment Method Section -->
 <div class="payment-method-section">
     <h3 class="payment-title">
-        <i class="fas fa-wallet"></i> Please complete payment to secure your Booking
+        <i class="fas fa-wallet"></i> Select Payment Method
     </h3>
     
     <label class="payment-option">
-        <input type="radio" name="payment" value="GCash" checked onchange="toggleQRCode()">
+        <input type="radio" name="payment" value="GCash" checked id="gcashRadio" onchange="toggleQRCode()">
         <div class="payment-card">
             <div class="payment-info">
                 <strong>GCash</strong>
@@ -227,30 +227,29 @@
         </div>
     </label>
     
-    <!-- GCash QR Code Display (Hidden by default) -->
-    <div class="qr-code-container" id="gcashQR">
+    <!-- GCash QR Code Display -->
+    <div class="qr-code-container" id="gcashQR" style="display: none;">
         <div class="qr-header">
             <i class="fas fa-qrcode"></i>
-            <h4>Scan to Pay with GCash</h4>
+            <h4>GCash Payment Details</h4>
         </div>
         
-        <div class="qr-image-wrapper">
-            <!-- Replace this with your actual GCash QR code image -->
-            <img src="gcash.png" alt="GCash QR Code" class="qr-code-img">
+        <!-- Placeholder QR Code (Text-based) -->
+        <div class="qr-placeholder">
+            <i class="fas fa-qrcode" style="font-size: 4rem; color: var(--primary); margin-bottom: 15px;"></i>
+            <p style="color: #6b7280; font-size: 0.95rem;">
+                <strong>GCash Number:</strong><br>
+                <span style="font-size: 1.3rem; color: var(--primary); font-weight: 700;">09XX XXX XXXX</span>
+            </p>
+            <p style="color: #6b7280; font-size: 0.9rem; margin-top: 10px;">
+                <strong>Account Name:</strong> E.Court
+            </p>
         </div>
         
         <div class="qr-details">
             <div class="qr-detail-row">
-                <span class="qr-label">Account Name:</span>
-                <span class="qr-value">E.Court</span>
-            </div>
-            <div class="qr-detail-row">
-                <span class="qr-label">GCash Number:</span>
-                <span class="qr-value">0991 502 0383</span>
-            </div>
-            <div class="qr-detail-row total-row">
                 <span class="qr-label">Amount to Pay:</span>
-                <span class="qr-value amount">₱250.00</span>
+                <span class="qr-value amount" id="dynamicQrPrice">₱0.00</span>
             </div>
         </div>
         
@@ -258,12 +257,15 @@
             <p><i class="fas fa-info-circle"></i> <strong>How to pay:</strong></p>
             <ol>
                 <li>Open your GCash app</li>
-                <li>Tap "Scan QR" or "Pay QR"</li>
-                <li>Scan the QR code above</li>
-                <li>Confirm the amount and pay</li>
-                <li>Take a screenshot of the payment receipt</li>
+                <li>Tap "Send Money"</li>
+                <li>Enter the number above</li>
+                <li>Enter the exact amount</li>
+                <li>Take a screenshot of the receipt</li>
             </ol>
         </div>
+    </div>
+</div>
+        
         <!-- Proof of Payment Upload -->
 <div class="proof-upload-section" id="proofUploadSection">
     <h3 class="upload-title">
