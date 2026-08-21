@@ -81,25 +81,27 @@
             <!-- Progress Indicator -->
             <div class="step-indicator">Step <span id="currentStepNum">1</span> of 3</div>
             
-            <!-- Step 1: Contact Info -->
-            <div class="booking-step active" id="step1">
-                <h2 class="step-title">You're One Step Away</h2>
-                <p class="step-subtitle">Please fill your information.</p>
-                
-                <form class="clean-form" id="contactForm">
-                    <div class="form-field">
-                        <label for="firstName">Name</label>
-                        <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
-                    </div>
-                    
-                    <div class="form-field">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                    </div>
-                    
-                    <button type="button" class="claim-btn" onclick="goToStep2()">
-                        Continue to Court Selection
-                    </button>
+<!-- Step 1: Contact Info -->
+<div class="booking-step active" id="step1">
+    <h2 class="step-title">You're One Step Away</h2>
+    
+    <form class="clean-form" id="contactForm" onsubmit="return false;">
+        <div class="form-field">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Enter your first name" required>
+        </div>
+        
+        <div class="form-field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
+        </div>
+        
+        <!-- IMPORTANT: type must be "button", not "submit" -->
+        <button type="button" class="claim-btn" onclick="goToStep2()">
+            Continue to Court Selection
+        </button>
+    </form>
+</div>
                     
                     <p class="privacy-note">
                         <i class="fas fa-lock"></i> Your info is safe. Ever.
