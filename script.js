@@ -213,7 +213,6 @@ function goToStep1() {
 function goToStep3() {
     var court = document.querySelector('input[name="court"]:checked');
     var dateInput = document.getElementById('bookingDate');
-    var payment = document.querySelector('input[name="payment"]:checked');
     
     if (!court) {
         alert('Please select a court');
@@ -227,11 +226,6 @@ function goToStep3() {
     
     if (!selectedTime) {
         alert('Please select a time range');
-        return;
-    }
-    
-    if (!payment) {
-        alert('Please select a payment method');
         return;
     }
     
