@@ -1530,3 +1530,32 @@ ul {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== Center QR Code and Number ===== */
+.qr-code-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 40px 20px !important;
+}
+
+.qr-image-wrapper {
+    margin-bottom: 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.qr-code-img {
+    margin: 0 auto !important;
+    display: block !important;
+}
+
+.qr-phone-number {
+    text-align: center !important;
+    width: 100% !important;
+    font-size: 1.5rem; /* Optional: makes number slightly bigger */
+    font-weight: bold;
+    margin-top: 10px;
+}
