@@ -227,6 +227,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // ===== Time Range & Price Calculation =====
 document.addEventListener('DOMContentLoaded', function() {
+    // ===== Toggle GCash QR Code =====
+const gcashRadio = document.getElementById('gcashRadio');
+const qrContainer = document.getElementById('gcashQR');
+const dynamicQrPrice = document.getElementById('dynamicQrPrice');
+
+if (gcashRadio && qrContainer) {
+    // Show QR when GCash is selected
+    gcashRadio.addEventListener('change', function() {
+        if (this.checked) {
+            qrContainer.style.display = 'block';
+            // Update QR price dynamically based on selection
+            if (bookingData.totalPrice > 0) {
+                dynamicQrPrice.textContent = '₱' + bookingData.totalPrice.toLocaleString();
+            }
+        } else {
+            qrContainer.style.display = 'none';
+        }
+    });
+    
+    // Show immediately on load if already checked
+    if (gcashRadio.checked) {
+        qrContainer.style.display = 'block';
+    }
+}
+
+// Update QR price when duration changes
+const originalCalculateDuration = calculateDuration;
+// We will just hook into the calculateDuration logic if it exists, 
+// but to be safe, add this to your calculateDuration function:
+/* 
+   Inside calculateDuration(), add this line at the very end:
+   if(dynamicQrPrice && bookingData.totalPrice > 0) {
+       dynamicQrPrice.textContent = '₱' + bookingData.totalPrice.toLocaleString();
+   }
+*/
     const startTime = document.getElementById('startTime');
     const endTime = document.getElementById('endTime');
     
