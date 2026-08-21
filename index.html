@@ -295,6 +295,57 @@
         You must upload proof of payment before proceeding.
     </p>
 </div>
+        <!-- Payment Method Section -->
+<div class="payment-method-section">
+    <h3 class="payment-title">
+        <i class="fas fa-wallet"></i> Select Payment Method
+    </h3>
+    
+    <label class="payment-option">
+        <input type="radio" name="payment" value="GCash" checked id="gcashRadio">
+        <div class="payment-card">
+            <div class="payment-info">
+                <strong>GCash</strong>
+                <span>Mobile Wallet</span>
+            </div>
+            <i class="fas fa-mobile-alt payment-icon"></i>
+        </div>
+    </label>
+    
+    <!-- GCash QR Code Display -->
+    <div class="qr-code-container" id="gcashQR" style="display: none;">
+        <div class="qr-header">
+            <i class="fas fa-qrcode"></i>
+            <h4>Scan to Pay with GCash</h4>
+        </div>
+        
+        <div class="qr-image-wrapper">
+            <!-- Make sure you have an image named gcash-qr.png in your images folder -->
+            <img src="images/gcash-qr.png" alt="GCash QR Code" class="qr-code-img">
+        </div>
+        
+        <div class="qr-details">
+            <div class="qr-detail-row">
+                <span class="qr-label">Account Name:</span>
+                <span class="qr-value">E.Court</span>
+            </div>
+            <div class="qr-detail-row">
+                <span class="qr-label">Amount to Pay:</span>
+                <span class="qr-value amount" id="dynamicQrPrice">₱0.00</span>
+            </div>
+        </div>
+        
+        <div class="qr-instructions">
+            <p><i class="fas fa-info-circle"></i> <strong>How to pay:</strong></p>
+            <ol>
+                <li>Open your GCash app</li>
+                <li>Tap "Scan QR"</li>
+                <li>Scan the code above</li>
+                <li>Take a screenshot of the receipt</li>
+            </ol>
+        </div>
+    </div>
+</div>
     
     <!-- Navigation Buttons -->
 <div class="step-navigation">
