@@ -1559,3 +1559,32 @@ ul {
     font-weight: bold;
     margin-top: 10px;
 }
+
+/* ===== Centered QR Code Display ===== */
+.qr-code-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    margin: 25px 0;
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(45, 90, 39, 0.1);
+}
+
+.qr-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-code-img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    border: 3px solid var(--primary);
+    border-radius: 12px;
+    padding: 15px;
+    background: white;
+}
