@@ -211,23 +211,6 @@
         </p>
     </div>
 </div>
-    
-<!-- Payment Method Section -->
-<div class="payment-method-section">
-    <h3 class="payment-title">
-        <i class="fas fa-wallet"></i> Select Payment Method
-    </h3>
-    
-    <label class="payment-option">
-        <input type="radio" name="payment" value="GCash" checked id="gcashRadio" onchange="toggleQRCode()">
-        <div class="payment-card">
-            <div class="payment-info">
-                <strong>GCash</strong>
-                <span>Mobile Wallet</span>
-            </div>
-            <i class="fas fa-mobile-alt payment-icon"></i>
-        </div>
-    </label>
         
         <!-- Placeholder QR Code (Text-based) -->
         <div class="qr-placeholder">
@@ -256,21 +239,10 @@
         </div>
         
         <div class="qr-image-wrapper">
-            <!-- Make sure you have an image named gcash-qr.png in your images folder -->
+            <!-- Make sure you have an image named gcash.png in your images folder -->
             <img src="gcash.png" alt="GCash QR Code" class="qr-code-img">
         </div>
-        
-        <div class="qr-details">
-            <div class="qr-detail-row">
-                <span class="qr-label">Account Name:</span>
-                <span class="qr-value">E.Court</span>
-            </div>
-            <div class="qr-detail-row">
-                <span class="qr-label">Amount to Pay:</span>
-                <span class="qr-value amount" id="dynamicQrPrice">₱0.00</span>
-            </div>
-        </div>
-        
+
         <!-- Proof of Payment Upload -->
 <div class="proof-upload-section" id="proofUploadSection">
     <h3 class="upload-title">
@@ -293,8 +265,6 @@
                 <button type="button" class="remove-file" onclick="removeFile()">
                     <i class="fas fa-times"></i> Remove
                 </button>
-            </div>
-        </div>
     </div>
     
     <p class="upload-notice">
