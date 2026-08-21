@@ -253,46 +253,61 @@
     </div>
 </div>
             
-            <!-- Step 3: Confirmation -->
-            <div class="booking-step" id="step3">
-                <div class="confirmation-header">
-                    <div class="checkmark-circle">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <h2 class="step-title">You're All Set!</h2>
-                    <p class="step-subtitle">Review your booking details below:</p>
-                </div>
-                
-                <div class="booking-summary">
-                    <div class="summary-row">
-                        <span class="summary-label">Name</span>
-                        <span class="summary-value" id="summaryName">-</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Email</span>
-                        <span class="summary-value" id="summaryEmail">-</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Court</span>
-                        <span class="summary-value" id="summaryCourt">-</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Date & Time</span>
-                        <span class="summary-value" id="summaryDateTime">-</span>
-                    </div>
-                    <div class="summary-row total">
-                        <span class="summary-label">Total Amount</span>
-                        <span class="summary-value price" id="summaryPrice">₱0</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Payment Method</span>
-                        <span class="summary-value" id="summaryPayment">GCash</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Proof of Payment</span>
-                        <span class="summary-value" id="summaryProof">-</span>
-                    </div>
-                </div>
+<!-- Step 3: Confirmation -->
+<div class="booking-step" id="step3">
+    <div class="confirmation-header">
+        <div class="checkmark-circle">
+            <i class="fas fa-check"></i>
+        </div>
+        <h2 class="step-title">You're All Set!</h2>
+        <p class="step-subtitle">Review your booking details below:</p>
+    </div>
+    
+    <div class="booking-summary">
+        <div class="summary-row">
+            <span class="summary-label">Name</span>
+            <span class="summary-value" id="summaryName">-</span>
+        </div>
+        <div class="summary-row">
+            <span class="summary-label">Email</span>
+            <span class="summary-value" id="summaryEmail">-</span>
+        </div>
+        <div class="summary-row">
+            <span class="summary-label">Court</span>
+            <span class="summary-value" id="summaryCourt">-</span>
+        </div>
+        <div class="summary-row">
+            <span class="summary-label">Date & Time</span>
+            <span class="summary-value" id="summaryDateTime">-</span>
+        </div>
+        <div class="summary-row total">
+            <span class="summary-label">Total Amount</span>
+            <span class="summary-value price" id="summaryPrice">0</span>
+        </div>
+        <div class="summary-row">
+            <span class="summary-label">Payment Method</span>
+            <span class="summary-value" id="summaryPayment">GCash</span>
+        </div>
+        <div class="summary-row">
+            <span class="summary-label">Proof of Payment</span>
+            <span class="summary-value" id="summaryProof">-</span>
+        </div>
+    </div>
+    
+    <div class="step-navigation">
+        <button class="back-btn" onclick="goToStep2()">
+            <i class="fas fa-arrow-left"></i> Edit
+        </button>
+        <button class="claim-btn" onclick="confirmBooking()">
+            Confirm Booking
+        </button>
+    </div>
+    
+    <p class="booking-notice">
+        <i class="fas fa-info-circle"></i> 
+        You'll receive confirmation via Email within 2 minutes.
+    </p>
+</div>
                 
                 <div class="step-navigation">
                     <button class="back-btn" onclick="goToStep2()">
