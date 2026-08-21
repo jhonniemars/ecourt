@@ -1635,3 +1635,111 @@ ul {
         transform: translateY(0);
     }
 }
+
+/* ===== Amount to Pay Box ===== */
+.total-amount-box {
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(45, 90, 39, 0.1);
+    animation: slideUp 0.4s ease;
+}
+
+.amount-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #e5e7eb;
+}
+
+.amount-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.amount-label {
+    color: #6b7280;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.amount-value {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.rate-row .amount-value {
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.total-row {
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 2px solid var(--primary);
+    border-bottom: none;
+}
+
+.total-row .amount-label {
+    color: #1f2937;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.total-row .amount-value.price {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+/* ===== QR Code Display ===== */
+.qr-code-display {
+    text-align: center;
+    padding: 30px 20px;
+    margin: 25px 0;
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(45, 90, 39, 0.1);
+    animation: slideUp 0.4s ease;
+}
+
+.qr-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.qr-code-img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    border: 3px solid var(--primary);
+    border-radius: 12px;
+    padding: 15px;
+    background: white;
+}
+
+.qr-instruction-text {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
