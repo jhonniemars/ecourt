@@ -941,6 +941,15 @@ ul {
     margin-bottom: 8px;
 }
 
+.qr-placeholder {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, rgba(45, 90, 39, 0.05) 0%, rgba(45, 90, 39, 0.02) 100%);
+    border: 2px dashed var(--primary);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
 .qr-header h4 {
     font-size: 1.1rem;
     color: #1f2937;
