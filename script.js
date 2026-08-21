@@ -15,6 +15,57 @@ const TIME_SLOTS = [
     '8:00 PM - 10:00 PM'
 ];
 
+// ===== Reset Booking Form Function (Defined First) =====
+function resetBookingForm() {
+    document.querySelectorAll('.booking-step').forEach(step => {
+        step.classList.remove('active');
+    });
+    
+    if (document.getElementById('step1')) {
+        document.getElementById('step1').classList.add('active');
+    }
+    
+    if (document.getElementById('currentStepNum')) {
+        document.getElementById('currentStepNum').textContent = '1';
+    }
+    
+    if (document.getElementById('firstName')) {
+        document.getElementById('firstName').value = '';
+    }
+    
+    if (document.getElementById('email')) {
+        document.getElementById('email').value = '';
+    }
+    
+    if (document.getElementById('bookingDate')) {
+        document.getElementById('bookingDate').value = '';
+    }
+    
+    document.querySelectorAll('.time-slot-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    
+    if (document.getElementById('proofFile')) {
+        document.getElementById('proofFile').value = '';
+    }
+    
+    if (document.getElementById('uploadPreview')) {
+        document.getElementById('uploadPreview').style.display = 'none';
+    }
+    
+    if (document.getElementById('uploadPlaceholder')) {
+        document.getElementById('uploadPlaceholder').style.display = 'block';
+    }
+    
+    if (document.getElementById('reviewBtn')) {
+        document.getElementById('reviewBtn').disabled = true;
+    }
+    
+    selectedTime = null;
+    bookingData = {};
+    currentStep = 1;
+}
+
 // ===== Initialize on Page Load =====
 document.addEventListener('DOMContentLoaded', function() {
     // Set minimum date to today
@@ -56,11 +107,9 @@ function renderTimeSlots() {
             btn.title = 'This slot is already booked';
         } else {
             btn.addEventListener('click', function() {
-                // Remove selected from all slots
                 document.querySelectorAll('.time-slot-btn').forEach(s => {
                     s.classList.remove('selected');
                 });
-                // Mark this as selected
                 this.classList.add('selected');
                 selectedTime = this.dataset.time;
             });
@@ -121,7 +170,6 @@ function goToStep2() {
     document.getElementById('currentStepNum').textContent = '2';
     currentStep = 2;
     
-    // Re-render time slots when entering step 2
     renderTimeSlots();
     
     return true;
@@ -146,7 +194,6 @@ function goToStep3() {
     if (!selectedTime) { alert('Please select a time slot'); return false; }
     if (!payment) { alert('Please select a payment method'); return false; }
     
-    // Double-check slot isn't booked (race condition protection)
     const bookedSlots = getBookedSlots(date);
     if (bookedSlots.includes(selectedTime)) {
         alert('Sorry, this time slot was just booked by someone else. Please choose another.');
@@ -159,7 +206,6 @@ function goToStep3() {
     bookingData.time = selectedTime;
     bookingData.payment = payment.value;
     
-    // Show summary
     document.getElementById('summaryName').textContent = bookingData.firstName;
     document.getElementById('summaryEmail').textContent = bookingData.email;
     document.getElementById('summaryCourt').textContent = bookingData.court;
@@ -183,10 +229,8 @@ function goToStep3() {
 
 // ===== Confirm Booking =====
 function confirmBooking() {
-    // Save the booked slot to localStorage
     saveBookedSlot(bookingData.date, bookingData.time);
     
-    // Create booking message
     const message = 'NEW BOOKING - E.Court\n\nName: ' + bookingData.firstName + 
                    '\nEmail: ' + bookingData.email + 
                    '\nCourt: ' + bookingData.court + 
@@ -197,29 +241,9 @@ function confirmBooking() {
     navigator.clipboard.writeText(message).then(function() {
         alert('✅ Success! Your booking is confirmed.');
         
-        // Reset form and go home
         resetBookingForm();
         window.location.href = '#home';
     });
-}
-
-// ===== Reset Booking Form =====
-function resetBookingForm() {
-    document.querySelectorAll('.booking-step').forEach(step => {
-        step.classList.remove('active');
-    });
-    document.getElementById('step1').classList.add('active');
-    document.getElementById('currentStepNum').textContent = '1';
-    
-    document.getElementById('firstName').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('bookingDate').value = '';
-    
-    selectedTime = null;
-    bookingData = {};
-    currentStep = 1;
-    
-    renderTimeSlots();
 }
 
 // ===== Email Validation =====
@@ -284,5 +308,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-console.log('%c🎾 Welcome to E.Court!', 'color: #2d5a27; font-size: 20px; font-weight: bold;');
+console.log('%c Welcome to E.Court!', 'color: #2d5a27; font-size: 20px; font-weight: bold;');
 console.log('%cPlay • Snack • Connect', 'color: #c4956a; font-size: 14px;');
