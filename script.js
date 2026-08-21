@@ -281,6 +281,11 @@ function calculateDuration() {
     const priceAmount = document.getElementById('priceAmount');
     const notice = document.getElementById('timeNotice');
     const noticeText = document.getElementById('noticeText');
+    const dynamicQrPrice = document.getElementById('dynamicQrPrice');
+    if (dynamicQrPrice && bookingData.totalPrice > 0) {
+    dynamicQrPrice.textContent = '' + bookingData.totalPrice.toLocaleString();
+    }
+}
     
     if (!startHour || !endHour) {
         durationDisplay.style.display = 'none';
