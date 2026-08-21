@@ -282,7 +282,7 @@
         </div>
         <div class="summary-row total">
             <span class="summary-label">Total Amount</span>
-            <span class="summary-value price" id="summaryPrice">0</span>
+            <span class="summary-value price" id="summaryPrice">₱0</span>
         </div>
         <div class="summary-row">
             <span class="summary-label">Payment Method</span>
@@ -292,6 +292,15 @@
             <span class="summary-label">Proof of Payment</span>
             <span class="summary-value" id="summaryProof">-</span>
         </div>
+    </div>
+    
+    <div class="step-navigation">
+        <button class="back-btn" onclick="goToStep2()">
+            <i class="fas fa-arrow-left"></i> Edit
+        </button>
+        <button class="claim-btn" onclick="confirmBooking()">
+            Confirm Booking
+        </button>
     </div>
     
     <p class="booking-notice">
@@ -316,8 +325,6 @@
                     <i class="fas fa-plus"></i> Book Another Slot
                 </button>
             </div>
-        </div>
-    </div>
 </section>
 
 <!-- Back to Top Button -->
