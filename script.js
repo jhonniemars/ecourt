@@ -175,39 +175,46 @@ function toggleQRCode() {
 
 // ===== Step Navigation =====
 function goToStep2() {
-    const firstNameInput = document.getElementById('firstName');
-    const emailInput = document.getElementById('email');
+    console.log("Button clicked! Trying to go to Step 2..."); // This helps us debug
     
-    if (!firstNameInput || !emailInput) {
-        return false;
+    // 1. Get the input values
+    var nameInput = document.getElementById('firstName');
+    var emailInput = document.getElementById('email');
+    
+    // 2. Check if inputs exist (prevents silent crashes)
+    if (!nameInput || !emailInput) {
+        alert("Error: Could not find the Name or Email fields. Check your HTML IDs.");
+        return;
     }
-    
-    const firstName = firstNameInput.value.trim();
-    const email = emailInput.value.trim();
-    
-    if (!firstName) {
-        alert('Please enter your first name');
-        return false;
+
+    var firstName = nameInput.value.trim();
+    var email = emailInput.value.trim();
+
+    // 3. Validate
+    if (firstName === "") {
+        alert("Please enter your first name.");
+        return;
     }
-    
-    if (!email) {
-        alert('Please enter your email');
-        return false;
+    if (email === "") {
+        alert("Please enter your email address.");
+        return;
     }
-    
+
+    // 4. Save data
     bookingData.firstName = firstName;
     bookingData.email = email;
-    
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-    const currentStepNum = document.getElementById('currentStepNum');
-    
+
+    // 5. Switch Steps
+    var step1 = document.getElementById('step1');
+    var step2 = document.getElementById('step2');
+    var stepNum = document.getElementById('currentStepNum');
+
     if (step1) step1.classList.remove('active');
     if (step2) step2.classList.add('active');
-    if (currentStepNum) currentStepNum.textContent = '2';
+    if (stepNum) stepNum.textContent = '2';
     
     currentStep = 2;
-    return true;
+    console.log("Successfully moved to Step 2!");
 }
 
 function goToStep1() {
