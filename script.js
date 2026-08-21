@@ -66,6 +66,10 @@ if (qrDisplay) {
     // Scroll to QR code
     qrDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+    var qrDisplay = document.getElementById('qrCodeDisplay');
+if (qrDisplay) {
+    qrDisplay.style.display = 'block';
+}
     
     // Validation
     if (hours <= 0) {
