@@ -405,3 +405,47 @@ anchors.forEach(function(anchor) {
 });
 
 console.log('E.Court System Ready');
+
+// ===== File Upload Handling =====
+let proofFileData = null;
+
+function handleFileUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+    
+    if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file (PNG, JPG)');
+        input.value = '';
+        return;
+    }
+    
+    if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB');
+        input.value = '';
+        return;
+    }
+    
+    proofFileData = file;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('previewImg').src = e.target.result;
+        document.getElementById('fileName').textContent = file.name;
+        document.getElementById('uploadPreview').style.display = 'flex';
+        document.getElementById('uploadPlaceholder').style.display = 'none';
+        document.getElementById('uploadArea').classList.add('has-file');
+        
+        // Enable Review button
+        document.getElementById('reviewBtn').disabled = false;
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeFile() {
+    document.getElementById('proofFile').value = '';
+    document.getElementById('uploadPreview').style.display = 'none';
+    document.getElementById('uploadPlaceholder').style.display = 'block';
+    document.getElementById('uploadArea').classList.remove('has-file');
+    proofFileData = null;
+    document.getElementById('reviewBtn').disabled = true;
+}
