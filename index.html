@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E.Court - Play • Snack • Connect | Pickleball Court</title>
     <meta name="description" content="E.Court - Your premier pickleball destination in Gingoog City. Book your court now!">
-    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -20,11 +20,8 @@
             <li><a href="#about">About</a></li>
             <li><a href="#booking">Book Now</a></li>
         </ul>
-        
         <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
     </div>
 </nav>
@@ -47,18 +44,14 @@
             <a href="#about" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Learn More</a>
         </div>
     </div>
-    <div class="scroll-indicator">
-        <i class="fas fa-chevron-down"></i>
-    </div>
+    <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
 </section>
 
 <!-- About Section -->
 <section class="about" id="about">
     <div class="container">
         <div class="about-grid">
-            <div class="about-image">
-                <img src="logo.png" alt="E.Court Logo">
-            </div>
+            <div class="about-image"><img src="logo.png" alt="E.Court Logo"></div>
             <div class="about-text">
                 <h3>Your Premier Pickleball Destination</h3>
                 <p>E.Court is more than just a pickleball court — it's a community hub where players of all levels come together to play, socialize, and have fun. Located in the heart of Gingoog City, we offer a world-class facility designed for both casual players and competitive athletes.</p>
@@ -72,265 +65,166 @@
 <section class="booking" id="booking">
     <div class="booking-container">
         <div class="booking-card">
-            <!-- Progress Indicator -->
             <div class="step-indicator">Step <span id="currentStepNum">1</span> of 3</div>
-            
-            <!-- Step 1: Contact Info -->
+
+            <!-- STEP 1 -->
             <div class="booking-step active" id="step1">
                 <h2 class="step-title">You're One Step Away</h2>
-                
                 <form class="clean-form" id="contactForm" onsubmit="return false;">
                     <div class="form-field">
                         <label for="firstName">First Name</label>
                         <input type="text" id="firstName" placeholder="Enter your first name" required>
                     </div>
-                    
                     <div class="form-field">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" placeholder="your@email.com" required>
                     </div>
-                    
-                    <button type="button" class="claim-btn" onclick="goToStep2()">
-                        Continue to Court Selection
-                    </button>
-                    
-                    <p class="privacy-note">
-                        <i class="fas fa-lock"></i> Your info is safe. Ever.
-                    </p>
+                    <button type="button" class="claim-btn" onclick="goToStep2()">Continue to Court Selection</button>
+                    <p class="privacy-note"><i class="fas fa-lock"></i> Your info is safe. Ever.</p>
                 </form>
             </div>
-            
-<!-- Step 2: Court & Time Selection -->
-<div class="booking-step" id="step2">
-    <h2 class="step-title">Pick Your preferred Time</h2>
-    <p class="step-subtitle">Make sure to screenshot GCASH payment to upload proof of payment.</p>
-    
-    <!-- Court Selection -->
-    <div class="court-selector">
-        <label class="court-option">
-            <input type="radio" name="court" value="Standard" checked>
-            <div class="court-card-content">
-                <div class="court-info">
-                    <strong>Standard</strong>
-                    <span>Pickleball Court</span>
+
+            <!-- STEP 2 -->
+            <div class="booking-step" id="step2">
+                <h2 class="step-title">Pick Your Court & Time</h2>
+                <p class="step-subtitle">Choose your preferred time slot.</p>
+
+                <div class="court-selector">
+                    <label class="court-option">
+                        <input type="radio" name="court" value="Standard" checked>
+                        <div class="court-card-content">
+                            <div class="court-info"><strong>Standard</strong><span>Pickleball Court</span></div>
+                            <span class="court-price">₱250/hr</span>
+                        </div>
+                    </label>
                 </div>
-                <span class="court-price">₱250/hr</span>
-            </div>
-        </label>
-    </div>
-    
-    <!-- Time Selection -->
-    <div class="time-selector">
-        <label for="bookingDate" class="date-label">
-            <i class="fas fa-calendar"></i> Select Date
-        </label>
-        <input type="date" id="bookingDate" class="date-input" required>
-        
-        <div class="time-range-selector">
-            <h4 class="section-label">
-                <i class="fas fa-clock"></i> Select Time Range
-            </h4>
-            
-            <div class="time-range-inputs">
-                <div class="time-input-group">
-                    <label>Start Time</label>
-                    <select id="startTime" class="time-select">
-                        <option value="">Select start time</option>
-                        <option value="6">6:00 AM</option>
-                        <option value="7">7:00 AM</option>
-                        <option value="8">8:00 AM</option>
-                        <option value="9">9:00 AM</option>
-                        <option value="10">10:00 AM</option>
-                        <option value="11">11:00 AM</option>
-                        <option value="12">12:00 PM</option>
-                        <option value="13">1:00 PM</option>
-                        <option value="14">2:00 PM</option>
-                        <option value="15">3:00 PM</option>
-                        <option value="16">4:00 PM</option>
-                        <option value="17">5:00 PM</option>
-                        <option value="18">6:00 PM</option>
-                        <option value="19">7:00 PM</option>
-                        <option value="20">8:00 PM</option>
-                    </select>
+
+                <div class="time-selector">
+                    <label for="bookingDate" class="date-label"><i class="fas fa-calendar"></i> Select Date</label>
+                    <input type="date" id="bookingDate" class="date-input" required>
+
+                    <div class="time-range-selector">
+                        <h4 class="section-label"><i class="fas fa-clock"></i> Select Time Range</h4>
+                        <div class="time-range-inputs">
+                            <div class="time-input-group">
+                                <label>Start Time</label>
+                                <select id="startTime" class="time-select">
+                                    <option value="">Select start time</option>
+                                    <option value="6">6:00 AM</option><option value="7">7:00 AM</option>
+                                    <option value="8">8:00 AM</option><option value="9">9:00 AM</option>
+                                    <option value="10">10:00 AM</option><option value="11">11:00 AM</option>
+                                    <option value="12">12:00 PM</option><option value="13">1:00 PM</option>
+                                    <option value="14">2:00 PM</option><option value="15">3:00 PM</option>
+                                    <option value="16">4:00 PM</option><option value="17">5:00 PM</option>
+                                    <option value="18">6:00 PM</option><option value="19">7:00 PM</option>
+                                    <option value="20">8:00 PM</option>
+                                </select>
+                            </div>
+                            <div class="time-separator">to</div>
+                            <div class="time-input-group">
+                                <label>End Time</label>
+                                <select id="endTime" class="time-select">
+                                    <option value="">Select end time</option>
+                                    <option value="7">7:00 AM</option><option value="8">8:00 AM</option>
+                                    <option value="9">9:00 AM</option><option value="10">10:00 AM</option>
+                                    <option value="11">11:00 AM</option><option value="12">12:00 PM</option>
+                                    <option value="13">1:00 PM</option><option value="14">2:00 PM</option>
+                                    <option value="15">3:00 PM</option><option value="16">4:00 PM</option>
+                                    <option value="17">5:00 PM</option><option value="18">6:00 PM</option>
+                                    <option value="19">7:00 PM</option><option value="20">8:00 PM</option>
+                                    <option value="21">9:00 PM</option><option value="22">10:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Amount Box -->
+                        <div class="total-amount-box" id="bookingDuration" style="display: none;">
+                            <div class="amount-row"><span class="amount-label">Booking Duration:</span><span class="amount-value" id="durationText">0 hours</span></div>
+                            <div class="amount-row rate-row"><span class="amount-label">Rate:</span><span class="amount-value">₱250 / hour</span></div>
+                            <div class="amount-row total-row"><span class="amount-label">Total Amount to Pay:</span><span class="amount-value price" id="priceAmount">₱0</span></div>
+                        </div>
+
+                        <!-- Time Notice -->
+                        <p class="time-notice" id="timeNotice" style="display: none;">
+                            <i class="fas fa-info-circle"></i><span id="noticeText"></span>
+                        </p>
+
+                        <!-- QR Code -->
+                        <div class="qr-code-display" id="qrCodeDisplay" style="display: none;">
+                            <div class="qr-image-wrapper">
+                                <img src="gcash.png" alt="GCash QR Code" class="qr-code-img">
+                            </div>
+                            <p class="qr-instruction-text">Scan to pay with GCash</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="time-separator">to</div>
-                
-                <div class="time-input-group">
-                    <label>End Time</label>
-                    <select id="endTime" class="time-select">
-                        <option value="">Select end time</option>
-                        <option value="7">7:00 AM</option>
-                        <option value="8">8:00 AM</option>
-                        <option value="9">9:00 AM</option>
-                        <option value="10">10:00 AM</option>
-                        <option value="11">11:00 AM</option>
-                        <option value="12">12:00 PM</option>
-                        <option value="13">1:00 PM</option>
-                        <option value="14">2:00 PM</option>
-                        <option value="15">3:00 PM</option>
-                        <option value="16">4:00 PM</option>
-                        <option value="17">5:00 PM</option>
-                        <option value="18">6:00 PM</option>
-                        <option value="19">7:00 PM</option>
-                        <option value="20">8:00 PM</option>
-                        <option value="21">9:00 PM</option>
-                        <option value="22">10:00 PM</option>
-                    </select>
+
+                <!-- Proof Upload -->
+                <div class="proof-upload-section" id="proofUploadSection">
+                    <h3 class="upload-title"><i class="fas fa-receipt"></i> Upload Proof of Payment</h3>
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="proofFile" accept="image/*" class="file-input" onchange="handleFileUpload(this)">
+                        <div class="upload-placeholder" id="uploadPlaceholder">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p class="upload-text">Click or drag to upload screenshot</p>
+                            <p class="upload-hint">PNG, JPG up to 5MB</p>
+                        </div>
+                        <div class="upload-preview" id="uploadPreview" style="display: none;">
+                            <img src="" alt="Payment Proof" class="preview-img" id="previewImg">
+                            <div class="preview-info">
+                                <p class="file-name" id="fileName">screenshot.png</p>
+                                <button type="button" class="remove-file" onclick="removeFile()"><i class="fas fa-times"></i> Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="upload-notice"><i class="fas fa-exclamation-circle"></i> You must upload proof of payment before proceeding.</p>
                 </div>
-            </div>
-            
-            <!-- Amount to Pay Box -->
-            <div class="total-amount-box" id="bookingDuration" style="display: none;">
-                <div class="amount-row">
-                    <span class="amount-label">Booking Duration:</span>
-                    <span class="amount-value" id="durationText">0 hours</span>
+
+                <div class="step-navigation">
+                    <button class="back-btn" onclick="goToStep1()"><i class="fas fa-arrow-left"></i> Back</button>
+                    <button class="claim-btn" id="reviewBtn" onclick="goToStep3()" disabled>Review Booking</button>
                 </div>
-                <div class="amount-row rate-row">
-                    <span class="amount-label">Rate:</span>
-                    <span class="amount-value">₱250 / hour</span>
-                </div>
-                <div class="amount-row total-row">
-                    <span class="amount-label">Total Amount to Pay:</span>
-                    <span class="amount-value price" id="priceAmount">₱0</span>
-                </div>
-            </div>
-            
-                <!-- Time Notice -->
-    <p class="time-notice" id="timeNotice" style="display: none;">
-        <i class="fas fa-info-circle"></i> 
-        <span id="noticeText"></span>
-    </p>
-            
-            <!-- QR Code Display -->
-            <div class="qr-code-display" id="qrCodeDisplay" style="display: none;">
-                <div class="qr-image-wrapper">
-                    <img src="gcash.png" alt="GCash QR Code" class="qr-code-img">
-                </div>
-                <p class="qr-instruction-text">Scan to pay with GCash</p>
             </div>
 
-    <!-- Proof of Payment Upload -->
-    <div class="proof-upload-section" id="proofUploadSection">
-        <h3 class="upload-title">
-            <i class="fas fa-receipt"></i> Upload Proof of Payment
-        </h3>
-        
-        <div class="upload-area" id="uploadArea">
-            <input type="file" id="proofFile" accept="image/*" class="file-input" onchange="handleFileUpload(this)">
-            
-            <div class="upload-placeholder" id="uploadPlaceholder">
-                <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                <p class="upload-text">Click or drag to upload screenshot</p>
-                <p class="upload-hint">PNG, JPG up to 5MB</p>
-            </div>
-            
-            <div class="upload-preview" id="uploadPreview" style="display: none;">
-                <img src="" alt="Payment Proof" class="preview-img" id="previewImg">
-                <div class="preview-info">
-                    <p class="file-name" id="fileName">screenshot.png</p>
-                    <button type="button" class="remove-file" onclick="removeFile()">
-                        <i class="fas fa-times"></i> Remove
-                    </button>
+            <!-- STEP 3 -->
+            <div class="booking-step" id="step3">
+                <div class="confirmation-header">
+                    <div class="checkmark-circle"><i class="fas fa-check"></i></div>
+                    <h2 class="step-title">You're All Set!</h2>
+                    <p class="step-subtitle">Review your booking details below:</p>
                 </div>
+                <div class="booking-summary">
+                    <div class="summary-row"><span class="summary-label">Name</span><span class="summary-value" id="summaryName">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Email</span><span class="summary-value" id="summaryEmail">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Court</span><span class="summary-value" id="summaryCourt">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Date & Time</span><span class="summary-value" id="summaryDateTime">-</span></div>
+                    <div class="summary-row total"><span class="summary-label">Total Amount</span><span class="summary-value price" id="summaryPrice">₱0</span></div>
+                    <div class="summary-row"><span class="summary-label">Payment Method</span><span class="summary-value" id="summaryPayment">GCash</span></div>
+                    <div class="summary-row"><span class="summary-label">Proof of Payment</span><span class="summary-value" id="summaryProof">-</span></div>
+                </div>
+                <div class="step-navigation">
+                    <button class="back-btn" onclick="goToStep2()"><i class="fas fa-arrow-left"></i> Edit</button>
+                    <button class="claim-btn" onclick="confirmBooking()">Confirm Booking</button>
+                </div>
+                <p class="booking-notice"><i class="fas fa-info-circle"></i> You'll receive confirmation via Email within 3 minutes.</p>
             </div>
-        </div>
-        
-        <p class="upload-notice">
-            <i class="fas fa-exclamation-circle"></i> 
-            You must upload proof of payment before proceeding.
-        </p>
-    </div>
-    
-    <!-- Navigation Buttons -->
-    <div class="step-navigation">
-        <button class="back-btn" onclick="goToStep1()">
-            <i class="fas fa-arrow-left"></i> Back
-        </button>
-        <button class="claim-btn" id="reviewBtn" onclick="goToStep3()" disabled>
-            Confirm Booking
-        </button>
-    </div>
-</div>
-            
-<!-- Step 3: Confirmation -->
-<div class="booking-step" id="step3">
-    <div class="confirmation-header">
-        <div class="checkmark-circle">
-            <i class="fas fa-check"></i>
-        </div>
-        <h2 class="step-title">You're All Set!</h2>
-        <p class="step-subtitle">Review your booking details below:</p>
-    </div>
-    
-    <div class="booking-summary">
-        <div class="summary-row">
-            <span class="summary-label">Name</span>
-            <span class="summary-value" id="summaryName">-</span>
-        </div>
-        <div class="summary-row">
-            <span class="summary-label">Email</span>
-            <span class="summary-value" id="summaryEmail">-</span>
-        </div>
-        <div class="summary-row">
-            <span class="summary-label">Court</span>
-            <span class="summary-value" id="summaryCourt">-</span>
-        </div>
-        <div class="summary-row">
-            <span class="summary-label">Date & Time</span>
-            <span class="summary-value" id="summaryDateTime">-</span>
-        </div>
-        <div class="summary-row total">
-            <span class="summary-label">Total Amount</span>
-            <span class="summary-value price" id="summaryPrice">₱0</span>
-        </div>
-        <div class="summary-row">
-            <span class="summary-label">Payment Method</span>
-            <span class="summary-value" id="summaryPayment">GCash</span>
-        </div>
-        <div class="summary-row">
-            <span class="summary-label">Proof of Payment</span>
-            <span class="summary-value" id="summaryProof">-</span>
-        </div>
-    </div>
-    
-    <div class="step-navigation">
-        <button class="back-btn" onclick="goToStep2()">
-            <i class="fas fa-arrow-left"></i> Edit
-        </button>
-        <button class="claim-btn" onclick="confirmBooking()">
-            Confirm Booking
-        </button>
-    </div>
-    
-    <p class="booking-notice">
-        <i class="fas fa-info-circle"></i> 
-        You'll receive confirmation via Email within 2 minutes.
-    </p>
-</div>
-            
-            <!-- Success Message -->
+
+            <!-- SUCCESS STEP -->
             <div class="booking-step success-step" id="successStep">
                 <div class="success-header">
-                    <div class="success-icon">🎉</div>
+                    <div class="success-icon"></div>
                     <h2 class="step-title">You're Booked!</h2>
                     <p class="step-subtitle">Check your Email for the confirmation details. We're excited to see you on the court!</p>
                 </div>
-                
-                <div class="social-follow">
-                    <p>While you wait, follow us → <strong>@ecourt.gingoog</strong></p>
-                </div>
-                
-                <button class="claim-btn" onclick="location.reload()">
-                    <i class="fas fa-plus"></i> Book Another Slot
-                </button>
+                <div class="social-follow"><p>While you wait, follow us → <strong>@ecourt.gingoog</strong></p></div>
+                <button class="claim-btn" onclick="location.reload()"><i class="fas fa-plus"></i> Book Another Slot</button>
             </div>
-<section>
 
-<!-- Back to Top Button -->
-<button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-</button>
+        </div>
+    </div>
+</section>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
 <script src="script.js"></script>
 </body>
