@@ -127,23 +127,88 @@
     </div>
     
     <!-- Date & Time Selection -->
-    <div class="time-selector">
-        <label for="bookingDate" class="date-label">
-            <i class="fas fa-calendar"></i> Select Date
-        </label>
-        <input type="date" id="bookingDate" class="date-input" required>
+<!-- Time Selection -->
+<div class="time-selector">
+    <label for="bookingDate" class="date-label">
+        <i class="fas fa-calendar"></i> Select Date
+    </label>
+    <input type="date" id="bookingDate" class="date-input" required>
+    
+    <div class="time-range-selector">
+        <h4 class="section-label">
+            <i class="fas fa-clock"></i> Select Time Range
+        </h4>
         
-<div class="time-slots-grid" id="timeSlots">
-    <button class="time-slot-btn" data-time="6:00 AM - 8:00 AM">6:00 AM - 8:00 AM</button>
-    <button class="time-slot-btn" data-time="8:00 AM - 10:00 AM">8:00 AM - 10:00 AM</button>
-    <button class="time-slot-btn" data-time="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</button>
-    <button class="time-slot-btn" data-time="12:00 PM - 2:00 PM">12:00 PM - 2:00 PM</button>
-    <button class="time-slot-btn" data-time="2:00 PM - 4:00 PM">2:00 PM - 4:00 PM</button>
-    <button class="time-slot-btn" data-time="4:00 PM - 6:00 PM">4:00 PM - 6:00 PM</button>
-    <button class="time-slot-btn" data-time="6:00 PM - 8:00 PM">6:00 PM - 8:00 PM</button>
-    <button class="time-slot-btn" data-time="8:00 PM - 10:00 PM">8:00 PM - 10:00 PM</button>
-</div>
+        <div class="time-range-inputs">
+            <div class="time-input-group">
+                <label>Start Time</label>
+                <select id="startTime" class="time-select">
+                    <option value="">Select start time</option>
+                    <option value="6">6:00 AM</option>
+                    <option value="7">7:00 AM</option>
+                    <option value="8">8:00 AM</option>
+                    <option value="9">9:00 AM</option>
+                    <option value="10">10:00 AM</option>
+                    <option value="11">11:00 AM</option>
+                    <option value="12">12:00 PM</option>
+                    <option value="13">1:00 PM</option>
+                    <option value="14">2:00 PM</option>
+                    <option value="15">3:00 PM</option>
+                    <option value="16">4:00 PM</option>
+                    <option value="17">5:00 PM</option>
+                    <option value="18">6:00 PM</option>
+                    <option value="19">7:00 PM</option>
+                    <option value="20">8:00 PM</option>
+                </select>
+            </div>
+            
+            <div class="time-separator">to</div>
+            
+            <div class="time-input-group">
+                <label>End Time</label>
+                <select id="endTime" class="time-select">
+                    <option value="">Select end time</option>
+                    <option value="7">7:00 AM</option>
+                    <option value="8">8:00 AM</option>
+                    <option value="9">9:00 AM</option>
+                    <option value="10">10:00 AM</option>
+                    <option value="11">11:00 AM</option>
+                    <option value="12">12:00 PM</option>
+                    <option value="13">1:00 PM</option>
+                    <option value="14">2:00 PM</option>
+                    <option value="15">3:00 PM</option>
+                    <option value="16">4:00 PM</option>
+                    <option value="17">5:00 PM</option>
+                    <option value="18">6:00 PM</option>
+                    <option value="19">7:00 PM</option>
+                    <option value="20">8:00 PM</option>
+                    <option value="21">9:00 PM</option>
+                    <option value="22">10:00 PM</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Duration & Price Display -->
+        <div class="booking-duration" id="bookingDuration" style="display: none;">
+            <div class="duration-info">
+                <i class="fas fa-hourglass-half"></i>
+                <div>
+                    <span class="duration-text" id="durationText">0 hours</span>
+                    <span class="duration-rate">at ₱250/hour</span>
+                </div>
+            </div>
+            <div class="total-price">
+                <span>Total:</span>
+                <span class="price-amount" id="priceAmount">₱0</span>
+            </div>
+        </div>
+        
+        <p class="time-notice" id="timeNotice" style="display: none;">
+            <i class="fas fa-info-circle"></i> 
+            <span id="noticeText"></span>
+        </p>
     </div>
+</div>
     
 <!-- Payment Method Section -->
 <div class="payment-method-section">
