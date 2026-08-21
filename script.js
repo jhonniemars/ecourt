@@ -1,16 +1,19 @@
-// ===== Always Go to Home on Load =====
-document.addEventListener('DOMContentLoaded', function() {
-    // Scroll to home immediately
-    window.location.href = '#home';
-    
-    // Reset booking form
-    resetBookingForm();
-});
-
 // ===== Booking System Variables =====
 let currentStep = 1;
 let selectedTime = null;
 let bookingData = {};
+
+// ===== Time Slots Configuration =====
+const TIME_SLOTS = [
+    '6:00 AM - 8:00 AM',
+    '8:00 AM - 10:00 AM',
+    '10:00 AM - 12:00 PM',
+    '12:00 PM - 2:00 PM',
+    '2:00 PM - 4:00 PM',
+    '4:00 PM - 6:00 PM',
+    '6:00 PM - 8:00 PM',
+    '8:00 PM - 10:00 PM'
+];
 
 // ===== Initialize on Page Load =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -21,16 +24,79 @@ document.addEventListener('DOMContentLoaded', function() {
         dateInput.setAttribute('min', today);
     }
     
-    // Time slot selection
-    const timeSlots = document.querySelectorAll('.time-slot-btn');
-    timeSlots.forEach(slot => {
-        slot.addEventListener('click', function() {
-            timeSlots.forEach(s => s.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedTime = this.dataset.time;
-        });
-    });
+    // Render time slots
+    renderTimeSlots();
+    
+    // Listen for date changes
+    if (dateInput) {
+        dateInput.addEventListener('change', renderTimeSlots);
+    }
 });
+
+// ===== Render Time Slots with BOOKED Status =====
+function renderTimeSlots() {
+    const container = document.getElementById('timeSlots');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    const selectedDate = document.getElementById('bookingDate').value;
+    const bookedSlots = getBookedSlots(selectedDate);
+    
+    TIME_SLOTS.forEach(time => {
+        const btn = document.createElement('button');
+        btn.className = 'time-slot-btn';
+        btn.textContent = time;
+        btn.dataset.time = time;
+        
+        // Check if this slot is booked
+        if (bookedSlots.includes(time)) {
+            btn.classList.add('booked');
+            btn.disabled = true;
+            btn.title = 'This slot is already booked';
+        } else {
+            btn.addEventListener('click', function() {
+                // Remove selected from all slots
+                document.querySelectorAll('.time-slot-btn').forEach(s => {
+                    s.classList.remove('selected');
+                });
+                // Mark this as selected
+                this.classList.add('selected');
+                selectedTime = this.dataset.time;
+            });
+        }
+        
+        container.appendChild(btn);
+    });
+    
+    // Reset selected time if it's now booked
+    if (selectedTime && bookedSlots.includes(selectedTime)) {
+        selectedTime = null;
+    }
+}
+
+// ===== Get Booked Slots for a Date =====
+function getBookedSlots(date) {
+    if (!date) return [];
+    
+    const bookings = JSON.parse(localStorage.getItem('ecourt_bookings') || '{}');
+    return bookings[date] || [];
+}
+
+// ===== Save Booked Slot =====
+function saveBookedSlot(date, time) {
+    const bookings = JSON.parse(localStorage.getItem('ecourt_bookings') || '{}');
+    
+    if (!bookings[date]) {
+        bookings[date] = [];
+    }
+    
+    if (!bookings[date].includes(time)) {
+        bookings[date].push(time);
+    }
+    
+    localStorage.setItem('ecourt_bookings', JSON.stringify(bookings));
+}
 
 // ===== Step 1 to Step 2 =====
 function goToStep2() {
@@ -55,6 +121,9 @@ function goToStep2() {
     document.getElementById('currentStepNum').textContent = '2';
     currentStep = 2;
     
+    // Re-render time slots when entering step 2
+    renderTimeSlots();
+    
     return true;
 }
 
@@ -70,30 +139,31 @@ function goToStep1() {
 function goToStep3() {
     const court = document.querySelector('input[name="court"]:checked');
     const date = document.getElementById('bookingDate').value;
+    const payment = document.querySelector('input[name="payment"]:checked');
     
-    if (!court) {
-        alert('Please select a court');
-        return false;
-    }
+    if (!court) { alert('Please select a court'); return false; }
+    if (!date) { alert('Please select a date'); return false; }
+    if (!selectedTime) { alert('Please select a time slot'); return false; }
+    if (!payment) { alert('Please select a payment method'); return false; }
     
-    if (!date) {
-        alert('Please select a date');
-        return false;
-    }
-    
-    if (!selectedTime) {
-        alert('Please select a time slot');
+    // Double-check slot isn't booked (race condition protection)
+    const bookedSlots = getBookedSlots(date);
+    if (bookedSlots.includes(selectedTime)) {
+        alert('Sorry, this time slot was just booked by someone else. Please choose another.');
+        renderTimeSlots();
         return false;
     }
     
     bookingData.court = court.value;
     bookingData.date = date;
     bookingData.time = selectedTime;
+    bookingData.payment = payment.value;
     
     // Show summary
     document.getElementById('summaryName').textContent = bookingData.firstName;
     document.getElementById('summaryEmail').textContent = bookingData.email;
     document.getElementById('summaryCourt').textContent = bookingData.court;
+    document.getElementById('summaryPayment').textContent = bookingData.payment;
     
     const formattedDate = new Date(bookingData.date).toLocaleDateString('en-US', {
         weekday: 'long',
@@ -113,6 +183,10 @@ function goToStep3() {
 
 // ===== Confirm Booking =====
 function confirmBooking() {
+    // Save the booked slot to localStorage
+    saveBookedSlot(bookingData.date, bookingData.time);
+    
+    // Create booking message
     const message = 'NEW BOOKING - E.Court\n\nName: ' + bookingData.firstName + 
                    '\nEmail: ' + bookingData.email + 
                    '\nCourt: ' + bookingData.court + 
@@ -123,9 +197,29 @@ function confirmBooking() {
     navigator.clipboard.writeText(message).then(function() {
         alert('✅ Success! Your booking is confirmed.');
         
-        // Redirect to Home section after clicking OK
+        // Reset form and go home
+        resetBookingForm();
         window.location.href = '#home';
     });
+}
+
+// ===== Reset Booking Form =====
+function resetBookingForm() {
+    document.querySelectorAll('.booking-step').forEach(step => {
+        step.classList.remove('active');
+    });
+    document.getElementById('step1').classList.add('active');
+    document.getElementById('currentStepNum').textContent = '1';
+    
+    document.getElementById('firstName').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('bookingDate').value = '';
+    
+    selectedTime = null;
+    bookingData = {};
+    currentStep = 1;
+    
+    renderTimeSlots();
 }
 
 // ===== Email Validation =====
@@ -133,124 +227,62 @@ function isValidEmail(email) {
     return email.indexOf('@') > 0 && email.indexOf('.') > 0;
 }
 
-// ===== Toggle QR Code Display =====
-function toggleQRCode() {
-    const gcashRadio = document.querySelector('input[name="payment"][value="GCash"]');
-    const qrContainer = document.getElementById('gcashQR');
-    
-    if (gcashRadio && gcashRadio.checked) {
-        qrContainer.classList.add('show');
-    } else {
-        qrContainer.classList.remove('show');
-    }
+// ===== Navbar Scroll Effect =====
+const navbar = document.getElementById('navbar');
+const backToTop = document.getElementById('backToTop');
+
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    // Show QR if GCash is already checked
-    toggleQRCode();
+if (backToTop) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
     
-    // Add event listener to payment radio buttons
-    const paymentRadios = document.querySelectorAll('input[name="payment"]');
-    paymentRadios.forEach(radio => {
-        radio.addEventListener('change', toggleQRCode);
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ===== Mobile Menu Toggle =====
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+    
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+}
+
+// ===== Smooth Scroll =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 });
 
-// ===== File Upload Handling =====
-let proofFileData = null;
-
-function handleFileUpload(input) {
-    const file = input.files[0];
-    
-    if (!file) return;
-    
-    // Validate file type
-    if (!file.type.startsWith('image/')) {
-        alert('Please upload an image file (PNG, JPG)');
-        input.value = '';
-        return;
-    }
-    
-    // Validate file size (5MB max)
-    if (file.size > 5 * 1024 * 1024) {
-        alert('File size must be less than 5MB');
-        input.value = '';
-        return;
-    }
-    
-    // Store file data
-    proofFileData = file;
-    
-    // Show preview
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        document.getElementById('previewImg').src = e.target.result;
-        document.getElementById('fileName').textContent = file.name;
-        document.getElementById('uploadPreview').style.display = 'flex';
-        document.getElementById('uploadPlaceholder').style.display = 'none';
-        document.getElementById('uploadArea').classList.add('has-file');
-        
-        // Enable Review button
-        document.getElementById('reviewBtn').disabled = false;
-    };
-    reader.readAsDataURL(file);
-}
-
-function removeFile() {
-    // Clear file input
-    document.getElementById('proofFile').value = '';
-    
-    // Hide preview
-    document.getElementById('uploadPreview').style.display = 'none';
-    document.getElementById('uploadPlaceholder').style.display = 'block';
-    document.getElementById('uploadArea').classList.remove('has-file');
-    
-    // Clear file data
-    proofFileData = null;
-    
-    // Disable Review button
-    document.getElementById('reviewBtn').disabled = true;
-}
-
-// Update goToStep3 to validate proof of payment
-function goToStep3() {
-    const court = document.querySelector('input[name="court"]:checked');
-    const date = document.getElementById('bookingDate').value;
-    const payment = document.querySelector('input[name="payment"]:checked');
-    
-    if (!court) { alert('Please select a court'); return false; }
-    if (!date) { alert('Please select a date'); return false; }
-    if (!selectedTime) { alert('Please select a time slot'); return false; }
-    if (!payment) { alert('Please select a payment method'); return false; }
-    if (!proofFileData) { alert('Please upload proof of payment'); return false; }
-    
-    // Store data
-    bookingData.court = court.value;
-    bookingData.date = date;
-    bookingData.time = selectedTime;
-    bookingData.payment = payment.value;
-    bookingData.proofFile = proofFileData.name;
-    
-    // Show summary
-    document.getElementById('summaryName').textContent = bookingData.firstName;
-    document.getElementById('summaryEmail').textContent = bookingData.email;
-    document.getElementById('summaryCourt').textContent = bookingData.court;
-    document.getElementById('summaryPayment').textContent = bookingData.payment;
-    document.getElementById('summaryProof').textContent = bookingData.proofFile;
-    
-    const formattedDate = new Date(bookingData.date).toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-    document.getElementById('summaryDateTime').textContent = formattedDate + ' · ' + bookingData.time;
-    
-    document.getElementById('step2').classList.remove('active');
-    document.getElementById('step3').classList.add('active');
-    document.getElementById('currentStepNum').textContent = '3';
-    currentStep = 3;
-    
-    return true;
-}
+console.log('%c🎾 Welcome to E.Court!', 'color: #2d5a27; font-size: 20px; font-weight: bold;');
+console.log('%cPlay • Snack • Connect', 'color: #c4956a; font-size: 14px;');
