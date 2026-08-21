@@ -59,6 +59,13 @@ function calculateDuration() {
     }
     
     var hours = endHour - startHour;
+
+    var qrDisplay = document.getElementById('qrCodeDisplay');
+if (qrDisplay) {
+    qrDisplay.style.display = 'flex';
+    // Scroll to QR code
+    qrDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
     
     // Validation
     if (hours <= 0) {
