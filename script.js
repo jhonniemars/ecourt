@@ -16,12 +16,11 @@ var bookingData = {
 
 // ===== Initialize Page =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Set min date to today
-    var dateInput = document.getElementById('bookingDate');
-    if (dateInput) {
-        var today = new Date().toISOString().split('T')[0];
-        dateInput.setAttribute('min', today);
-    }
+// Set min date to September 1, 2026
+var dateInput = document.getElementById('bookingDate');
+if (dateInput) {
+    dateInput.setAttribute('min', '2026-09-01');
+}
     
     // Add event listeners for time inputs
     var startTimeInput = document.getElementById('startTime');
